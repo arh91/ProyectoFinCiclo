@@ -1,5 +1,6 @@
 package controlador;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -128,6 +129,10 @@ public class Controlador {
 	public void insertarReserva(Reserva reserva) {
 		reservaDao.insertarReserva(reserva);
 	}
+
+	public void eliminarReserva(String codigo){
+		reservaDao.eliminarReserva(codigo);
+	}
 	
 	public void reservarCoche(Date fecInicio, Date fecFin, String cadena) {
 		cocheDao.reservarCoche(fecInicio, fecFin, cadena);
@@ -139,6 +144,10 @@ public class Controlador {
 	
 	public void insertarInvolucra(Involucra involucra) {
 		involucraDao.insertarInvolucra(involucra);
+	}
+
+	public void eliminarInvolucra(String codigo) throws SQLException {
+		involucraDao.eliminarInvolucra(codigo);
 	}
 	///////////////////////////////////////////////////////////////////////
 	

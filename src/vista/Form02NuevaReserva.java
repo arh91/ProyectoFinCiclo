@@ -51,7 +51,7 @@ public class Form02NuevaReserva extends JFrame {
 	private String fechaFinModificada;
 
 	private String dniCliente;
-	private String matricula;
+	private String matriculaCoche;
 	private Date fecInicioCancelar;
 	private Date fecFinalCancelar;
 	private String nifInvolucra;
@@ -64,6 +64,8 @@ public class Form02NuevaReserva extends JFrame {
 	private JTextField textField_Fecha_Inicio;
 	private JTextField textField_Matricula_Coche;
 	private JTextField textField_fecha_final;
+
+	private int codigoReservaCancelar;
 
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
@@ -235,12 +237,12 @@ public class Form02NuevaReserva extends JFrame {
 			Involucra involucra = new Involucra();
 
 
-			controlador.preguntarDisponibilidadCoche(matricula, coche);
+			controlador.preguntarDisponibilidadCoche(matriculaCoche, coche);
 
 			if(coche.isDisponible()==false) {
 				JOptionPane.showMessageDialog(null, "Lo sentimos, el coche seleccionado no se encuentra disponible para las fechas que usted ha seleccionado.");
 			}else {
-				controlador.reservarCoche(fechaInicio, fechaFinal, matricula);
+				controlador.reservarCoche(fechaInicio, fechaFinal, matriculaCoche);
 				Reserva(reserva);
 				Involucra(involucra);
 				controlador.insertarReserva(reserva);
@@ -253,7 +255,9 @@ public class Form02NuevaReserva extends JFrame {
 
 	private class CancelButtonActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-
+			datosCancelacion();
+			controlador.eliminarReserva(codigoReservaCancelar);
+			controlador.eliminarInvolucra(matriculaCoche);
 		}
 	}
 
@@ -352,7 +356,7 @@ public class Form02NuevaReserva extends JFrame {
 	private void Involucra(Involucra involucra) {
 		String infoCoche = String.valueOf(comboBox_Coches.getSelectedItem());
 		String[] arrCoche = infoCoche.split("  ");
-		matricula = arrCoche[0];
+		matriculaCoche = arrCoche[0];
 
 		String infoCliente = String.valueOf(comboBox_Clientes.getSelectedItem());
 		String[] arrCliente = infoCliente.split("  ");
@@ -361,7 +365,7 @@ public class Form02NuevaReserva extends JFrame {
 		codigoReserva = Integer.parseInt(textCodReserva.getText());
 		litros = Integer.parseInt(textLitros.getText());
 
-		involucra.setMatricula(matricula);
+		involucra.setMatricula(matriculaCoche);
 		involucra.setCliente(nifInvolucra);
 		involucra.setReserva(codigoReserva);
 		involucra.setLitros(litros);
@@ -369,7 +373,7 @@ public class Form02NuevaReserva extends JFrame {
 
 	private void datosCancelacion() {
 		dniCliente = textField_nif_cliente.getText();
-		matricula = textField_Matricula_Coche.getText();
+		matriculaCoche = textField_Matricula_Coche.getText();
 
 		modificarFechaInicioCanc();
 		modificarFechaFinCanc();
@@ -377,5 +381,6 @@ public class Form02NuevaReserva extends JFrame {
 		fecInicioCancelar = convertirFechas.convertirStringDate(fechaInicioModificadaCanc);
 		fecFinalCancelar = convertirFechas.convertirStringDate(fechaFinModificadaCanc);
 	}
+
 
 }

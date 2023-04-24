@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Date;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 import conexion.Conexion;
 import modeloVo.Cliente;
@@ -23,7 +23,7 @@ public class ReservaDao {
 		Date fecFinal = new Date(reserva.getFecFinal().getTime());
 		Conexion conex= new Conexion();
 		try {
-			String consulta = "INSERT INTO clientes VALUES (?, ?, ?)";
+			String consulta = "INSERT INTO reservas VALUES (?, ?, ?)";
 			PreparedStatement ps = conex.getConnection().prepareStatement(consulta);
 			ps.setInt(1,reserva.getCodigo());
 			ps.setDate(2, fecInicio);
@@ -35,6 +35,29 @@ public class ReservaDao {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			//JOptionPane.showMessageDialog(null, "Error, no se han podido guardar los datos");
+		}
+	}
+
+
+	public void eliminarReserva (String codigo){
+		int res = JOptionPane.showOptionDialog(new JFrame(), "¿Estás seguro que desea cancelar la reserva?", "Options",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+				new Object[] { "Sí, estoy seguro", "Volver atrás" }, JOptionPane.YES_OPTION);
+
+		if (res == JOptionPane.YES_OPTION) {
+			Conexion conex= new Conexion();
+			try {
+				String consulta = "DELETE FROM reservas WHERE reCodigo= ?";
+				PreparedStatement ps = conex.getConnection().prepareStatement(consulta);
+				ps.setString(1, codigo);
+				ps.executeUpdate();
+				JOptionPane.showMessageDialog(null, " La reserva se ha cancelado Correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+				ps.close();
+				conex.desconectar();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				JOptionPane.showMessageDialog(null, "Error, no se pudo cancelar la reserva");
+			}
 		}
 	}
 	
