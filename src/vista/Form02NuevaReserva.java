@@ -4,13 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controlador.Controlador;
-import modeloVo.Cliente;
 import modeloVo.Coche;
 import modeloVo.Involucra;
 import modeloVo.Reserva;
@@ -19,7 +17,6 @@ import validaciones.ConvertirFechas;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JComboBox;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
@@ -55,9 +52,11 @@ public class Form02NuevaReserva extends JFrame {
 
 	private String dniCliente;
 	private String matricula;
-	private Date fecInicio;
-	private Date fecFinal;
+	private Date fecInicioCancelar;
+	private Date fecFinalCancelar;
 	private String nifInvolucra;
+	private String fechaInicioModificadaCanc;
+	private String fechaFinModificadaCanc;
 
 	ConvertirFechas convertirFechas = new ConvertirFechas();
 
@@ -300,6 +299,42 @@ public class Form02NuevaReserva extends JFrame {
 
 		fechaFinModificada = anhoFin+"-"+mesFin+"-"+diaFin;
 	}
+
+	private void modificarFechaInicioCanc(){
+		fechaInicioModificadaCanc = textField_Fecha_Inicio.getText();
+		String[] arrFecInicialCanc = fechaInicioModificadaCanc.split("/");
+		String[] arrFecInicialModificadoCanc = {};
+
+		int j=0;
+		for(int i= arrFecInicialCanc.length-1; i>=0; i--){
+			arrFecInicialModificadoCanc[j] = arrFecInicialCanc[i];
+			j++;
+		}
+
+		String diaInicio = String.valueOf(arrFecInicialModificadoCanc[2]);
+		String mesInicio = String.valueOf(arrFecInicialModificadoCanc[1]);
+		String anhoInicio = String.valueOf(arrFecInicialModificadoCanc[0]);
+
+		fechaInicioModificadaCanc = anhoInicio+"-"+mesInicio+"-"+diaInicio;
+	}
+
+	private void modificarFechaFinCanc(){
+		fechaFinModificadaCanc = textField_fecha_final.getText();
+		String[] arrFecFinalCanc = fechaFinModificadaCanc.split("/");
+		String[] arrFecFinalModificadoCanc = {};
+
+		int k=0;
+		for(int i=arrFecFinalCanc.length-1; i>=0; i--){
+			arrFecFinalModificadoCanc[k] = arrFecFinalCanc[i];
+			k++;
+		}
+
+		String diaFin = String.valueOf(arrFecFinalModificadoCanc[2]);
+		String mesFin = String.valueOf(arrFecFinalModificadoCanc[1]);
+		String anhoFin = String.valueOf(arrFecFinalModificadoCanc[0]);
+
+		fechaFinModificadaCanc = anhoFin+"-"+mesFin+"-"+diaFin;
+	}
 	private void Reserva(Reserva reserva) {
 		codigoReserva = Integer.parseInt(textCodReserva.getText());
 
@@ -335,8 +370,12 @@ public class Form02NuevaReserva extends JFrame {
 	private void datosCancelacion() {
 		dniCliente = textField_nif_cliente.getText();
 		matricula = textField_Matricula_Coche.getText();
-		fecInicio = convertirFechas.convertirStringDate(textField_Fecha_Inicio.getText());
-		fecFinal = convertirFechas.convertirStringDate(textField_fecha_final.getText());
+
+		modificarFechaInicioCanc();
+		modificarFechaFinCanc();
+
+		fecInicioCancelar = convertirFechas.convertirStringDate(fechaInicioModificadaCanc);
+		fecFinalCancelar = convertirFechas.convertirStringDate(fechaFinModificadaCanc);
 	}
 
 }
