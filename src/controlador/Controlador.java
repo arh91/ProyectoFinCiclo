@@ -130,12 +130,16 @@ public class Controlador {
 		reservaDao.insertarReserva(reserva);
 	}
 
-	public void eliminarReserva(String codigo){
+	public void eliminarReserva(int codigo){
 		reservaDao.eliminarReserva(codigo);
 	}
 	
 	public void reservarCoche(Date fecInicio, Date fecFin, String cadena) {
 		cocheDao.reservarCoche(fecInicio, fecFin, cadena);
+	}
+
+	public void liberarCoche(String cadena){
+		cocheDao.liberarCoche(cadena);
 	}
 	
 	public void preguntarDisponibilidadCoche(String codigo, Coche coche) {
@@ -148,6 +152,10 @@ public class Controlador {
 
 	public void eliminarInvolucra(String codigo) throws SQLException {
 		involucraDao.eliminarInvolucra(codigo);
+	}
+
+	public void obtenerCodigoReserva(Involucra involucra, String matricula){
+		involucraDao.obtenerCodigoReserva(involucra, matricula);
 	}
 	///////////////////////////////////////////////////////////////////////
 	

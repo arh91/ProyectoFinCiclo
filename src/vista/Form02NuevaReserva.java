@@ -23,6 +23,7 @@ import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Date;
 import java.awt.event.ActionEvent;
@@ -257,9 +258,15 @@ public class Form02NuevaReserva extends JFrame {
 		public void actionPerformed(ActionEvent arg0) {
 			datosCancelacion();
 			controlador.eliminarReserva(codigoReservaCancelar);
-			controlador.eliminarInvolucra(matriculaCoche);
+			try {
+				controlador.eliminarInvolucra(matriculaCoche);
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+			controlador.liberarCoche(matriculaCoche);
 		}
 	}
+
 
 	private class AtrasButtonActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
@@ -372,6 +379,7 @@ public class Form02NuevaReserva extends JFrame {
 	}
 
 	private void datosCancelacion() {
+		Involucra involucra = new Involucra();
 		dniCliente = textField_nif_cliente.getText();
 		matriculaCoche = textField_Matricula_Coche.getText();
 
@@ -380,6 +388,10 @@ public class Form02NuevaReserva extends JFrame {
 
 		fecInicioCancelar = convertirFechas.convertirStringDate(fechaInicioModificadaCanc);
 		fecFinalCancelar = convertirFechas.convertirStringDate(fechaFinModificadaCanc);
+
+		controlador.obtenerCodigoReserva(involucra, matriculaCoche);
+
+		codigoReservaCancelar = involucra.getReserva();
 	}
 
 

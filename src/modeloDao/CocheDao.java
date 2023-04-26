@@ -98,5 +98,20 @@ public class CocheDao {
 			e.printStackTrace();
 		}		
 	}
+
+
+	public void liberarCoche(String cadena) {
+		Conexion conexion = new Conexion();
+
+		String consulta = "UPDATE coches SET coDisponible= 1"
+				+ " WHERE coMatricula = "+cadena+"";
+		PreparedStatement ps = null;
+		try {
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 }

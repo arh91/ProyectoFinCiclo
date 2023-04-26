@@ -9,6 +9,7 @@ import javax.swing.*;
 import conexion.Conexion;
 import modeloVo.Cliente;
 import modeloVo.Involucra;
+import modeloVo.Reserva;
 
 public class InvolucraDao {
 	
@@ -54,14 +55,14 @@ public class InvolucraDao {
 	}
 
 
-	public Integer obtenerCodigoReserva(String matricula){
+	public void obtenerCodigoReserva(Involucra involucra, String matricula){
 		Conexion conex= new Conexion();
 		try {
 			String consulta = "SELECT inReserva FROM reservas WHERE inMatricula= ?";
 			PreparedStatement ps = conex.getConnection().prepareStatement(consulta);
 			ResultSet res = ps.executeQuery();
 			while(res.next()){
-				list.add(res.getString("clDireccion"));
+				involucra.setReserva(res.getInt("inReserva"));
 			}
 			res.close();
 			conex.desconectar();

@@ -39,7 +39,7 @@ public class ReservaDao {
 	}
 
 
-	public void eliminarReserva (String codigo){
+	public void eliminarReserva (int codigo){
 		int res = JOptionPane.showOptionDialog(new JFrame(), "¿Estás seguro que desea cancelar la reserva?", "Options",
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
 				new Object[] { "Sí, estoy seguro", "Volver atrás" }, JOptionPane.YES_OPTION);
@@ -49,7 +49,7 @@ public class ReservaDao {
 			try {
 				String consulta = "DELETE FROM reservas WHERE reCodigo= ?";
 				PreparedStatement ps = conex.getConnection().prepareStatement(consulta);
-				ps.setString(1, codigo);
+				ps.setInt(1, codigo);
 				ps.executeUpdate();
 				JOptionPane.showMessageDialog(null, " La reserva se ha cancelado Correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
 				ps.close();
