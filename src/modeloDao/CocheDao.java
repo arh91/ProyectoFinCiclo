@@ -48,7 +48,29 @@ public class CocheDao {
 		return coches;
 	}
 	
-	
+
+	public boolean existeMatriculaCoche(String codigo){
+		boolean existe = false;
+		Conexion conex= new Conexion();
+		String comprobarCodigosBD = "SELECT * FROM coches WHERE coMatricula = ?";
+
+		try {
+				PreparedStatement ps = conex.getConnection().prepareStatement(comprobarCodigosBD);
+				ps.setString(1, codigo);
+				ResultSet resultSet=ps.executeQuery();
+				if(resultSet.next()) {
+					existe = true;
+				} else {
+					existe = false;
+				}
+		} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				JOptionPane.showMessageDialog(null, "Error, no se han podido guardar los datos");
+			}
+		return existe;
+	}
+
+
 	public void preguntarDisponibilidadCoche(String codigo, Coche coche) {
 		String valor;
 		Conexion conex = new Conexion();

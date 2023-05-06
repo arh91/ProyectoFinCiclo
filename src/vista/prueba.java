@@ -504,8 +504,8 @@ public class prueba extends JFrame {
                 controlador.reservarCoche(fechaInicio, fechaFinal, matricula);
 				/*Reserva(reserva);
 				Involucra(involucra);*/
-                controlador.insertarReserva(reserva);
-                controlador.insertarInvolucra(involucra);
+                /*controlador.insertarReserva(reserva);
+                controlador.insertarInvolucra(involucra);*/
             }
 
 

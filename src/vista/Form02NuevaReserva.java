@@ -237,6 +237,9 @@ public class Form02NuevaReserva extends JFrame {
 			Reserva reserva = new Reserva();
 			Involucra involucra = new Involucra();
 
+			if(controlador.existeMatriculaCoche(matriculaCoche)==false){
+				JOptionPane.showMessageDialog(null, "No disponemos de ningún coche con la matrícula "+matriculaCoche);
+			}
 
 			controlador.preguntarDisponibilidadCoche(matriculaCoche, coche);
 
@@ -246,23 +249,22 @@ public class Form02NuevaReserva extends JFrame {
 				controlador.reservarCoche(fechaInicio, fechaFinal, matriculaCoche);
 				Reserva(reserva);
 				Involucra(involucra);
-				controlador.insertarReserva(reserva);
-				controlador.insertarInvolucra(involucra);
+				codigoReserva = reserva.getCodigo();
+				controlador.insertarReserva(reserva, codigoReserva);
+				controlador.insertarInvolucra(involucra, codigoReserva);
 			}
-
-
 		}
 	}
 
 	private class CancelButtonActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			datosCancelacion();
-			controlador.eliminarReserva(codigoReservaCancelar);
 			try {
 				controlador.eliminarInvolucra(matriculaCoche);
 			} catch (SQLException e) {
 				throw new RuntimeException(e);
 			}
+			controlador.eliminarReserva(codigoReservaCancelar);
 			controlador.liberarCoche(matriculaCoche);
 		}
 	}

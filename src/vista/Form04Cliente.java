@@ -196,7 +196,8 @@ public class Form04Cliente extends JFrame{
 		cliente.setNombre(nombreCompleto);
 		cliente.setDireccion(direccion);
 		cliente.setTelefono(telefono);
-		
-		controlador.insertarCliente(cliente);
+
+		String dniCliente = cliente.getNif();
+		controlador.insertarCliente(cliente, dniCliente);
 	}
 }

@@ -106,8 +106,8 @@ public class Controlador {
 	
 	///////////////////////////////////////////////////////////////////////
 	
-	public void insertarCliente(Cliente cliente) {
-		clienteDao.insertarCliente(cliente);
+	public void insertarCliente(Cliente cliente, String codigo) {
+		clienteDao.insertarCliente(cliente, codigo);
 	}
 	
 	public void buscarCliente(Cliente cliente, String codigo) {
@@ -126,14 +126,18 @@ public class Controlador {
 		clienteDao.obtenerDireccionesClientes(list);
 	}
 	
-	public void insertarReserva(Reserva reserva) {
-		reservaDao.insertarReserva(reserva);
+	public void insertarReserva(Reserva reserva, int codigo) {
+		reservaDao.insertarReserva(reserva, codigo);
 	}
 
 	public void eliminarReserva(int codigo){
 		reservaDao.eliminarReserva(codigo);
 	}
-	
+
+	public boolean existeMatriculaCoche(String codigo){
+		return cocheDao.existeMatriculaCoche(codigo);
+	}
+
 	public void reservarCoche(Date fecInicio, Date fecFin, String cadena) {
 		cocheDao.reservarCoche(fecInicio, fecFin, cadena);
 	}
@@ -146,8 +150,8 @@ public class Controlador {
 		cocheDao.preguntarDisponibilidadCoche(codigo, coche);
 	}
 	
-	public void insertarInvolucra(Involucra involucra) {
-		involucraDao.insertarInvolucra(involucra);
+	public void insertarInvolucra(Involucra involucra, int codigoReserva) {
+		involucraDao.insertarInvolucra(involucra, codigoReserva);
 	}
 
 	public void eliminarInvolucra(String codigo) throws SQLException {

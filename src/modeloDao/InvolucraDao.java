@@ -13,18 +13,35 @@ import modeloVo.Reserva;
 
 public class InvolucraDao {
 	
-	public void insertarInvolucra (Involucra involucra){
+	public void insertarInvolucra (Involucra involucra, int codigoReserva){
+		boolean existe = false;
 		Conexion conex= new Conexion();
+
+		String comprobarCodigosBD = "SELECT * FROM involucra WHERE inReserva = ?";
+		String consulta = "INSERT INTO clientes VALUES (?, ?, ?, ?)";
 		try {
-			String consulta = "INSERT INTO clientes VALUES (?, ?, ?, ?)";
-			PreparedStatement ps = conex.getConnection().prepareStatement(consulta);
-			ps.setString(2, involucra.getMatricula());
-			ps.setString(3, involucra.getCliente());
-			ps.setInt(4, involucra.getReserva());
-			ps.setInt(5,  involucra.getLitros());
-			int filas = ps.executeUpdate();
+			PreparedStatement ps = conex.getConnection().prepareStatement(comprobarCodigosBD);
+			ps.setInt(1, codigoReserva);
+			ResultSet resultSet=ps.executeQuery();
+			if(resultSet.next()) {
+				existe = true;
+			} else {
+				existe = false;
+			}
+
+			if(existe){
+				return;
+			}
+
+
+			PreparedStatement ps1 = conex.getConnection().prepareStatement(consulta);
+			ps1.setString(2, involucra.getMatricula());
+			ps1.setString(3, involucra.getCliente());
+			ps1.setInt(4, involucra.getReserva());
+			ps1.setInt(5,  involucra.getLitros());
+			int filas = ps1.executeUpdate();
 			JOptionPane.showMessageDialog(null, "Se han guardado los datos correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
-			ps.close();
+			ps1.close();
 			conex.desconectar();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

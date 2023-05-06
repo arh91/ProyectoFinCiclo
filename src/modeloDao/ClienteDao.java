@@ -16,22 +16,70 @@ import modeloVo.FilaReserva;
 
 public class ClienteDao {
 
-	public void insertarCliente (Cliente cliente){
+	public void insertarCliente (Cliente cliente, String codigo){
+		boolean existe = false;
+		/*comprobarCodigosDatabase(codigo, existe);
+		System.out.println(existe);
+		if (existe){
+			JOptionPane.showMessageDialog(null, "El dni introducido ya existe en la base de datos.","Información",JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}*/
 		Conexion conex= new Conexion();
+		String comprobarCodigosBD = "SELECT * FROM clientes WHERE clNif = ?";
+
+		String consulta = "INSERT INTO clientes VALUES (?, ?, ?, ?)";
+
 		try {
-			String consulta = "INSERT INTO clientes VALUES (?, ?, ?, ?)";
-			PreparedStatement ps = conex.getConnection().prepareStatement(consulta);
-			ps.setString(1,cliente.getNif());
-			ps.setString(2, cliente.getNombre());
-			ps.setString(3, cliente.getDireccion());
-			ps.setInt(4, cliente.getTelefono());
-			int filas = ps.executeUpdate();
+			PreparedStatement ps = conex.getConnection().prepareStatement(comprobarCodigosBD);
+			ps.setString(1, codigo);
+			ResultSet resultSet=ps.executeQuery();
+			if(resultSet.next()) {
+				existe = true;
+			} else {
+				existe = false;
+			}
+
+			if(existe){
+				JOptionPane.showMessageDialog(null, "El dni introducido ya existe en la base de datos.","Información",JOptionPane.INFORMATION_MESSAGE);
+				return;
+			}
+
+			PreparedStatement ps1 = conex.getConnection().prepareStatement(consulta);
+			ps1.setString(1,cliente.getNif());
+			ps1.setString(2, cliente.getNombre());
+			ps1.setString(3, cliente.getDireccion());
+			ps1.setInt(4, cliente.getTelefono());
+			int filas = ps1.executeUpdate();
 			JOptionPane.showMessageDialog(null, "Se han guardado los datos correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
-			ps.close();
+			ps1.close();
 			conex.desconectar();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			JOptionPane.showMessageDialog(null, "Error, no se han podido guardar los datos");
+		}
+	}
+
+
+	public void comprobarCodigosDatabase(String codigo, boolean existe){
+		//String email = request.getParameter("email"); // Get email from a form
+		Conexion conex= new Conexion();
+
+		String query = "SELECT * FROM clientes WHERE clNif = ?"; // Select all users belongs to the provided email
+
+		try {
+			PreparedStatement statement; // Using a preparedStatement to prevent SQL-Injection
+			ResultSet resultSet;
+			statement = conex.getConnection().prepareStatement(query);
+			statement.setString(1, codigo);
+			resultSet = statement.executeQuery();
+
+			if(resultSet.next()) {
+				existe = true;
+			} else {
+				existe = false;
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
 		}
 	}
 	

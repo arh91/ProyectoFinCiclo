@@ -17,20 +17,36 @@ import validaciones.ConvertirFechas;
 
 public class ReservaDao {
 
-	public void insertarReserva (Reserva reserva){
-		
+	public void insertarReserva (Reserva reserva, int codigo){
+		boolean existe = false;
 		Date fecInicio = new Date(reserva.getFecInicio().getTime());
 		Date fecFinal = new Date(reserva.getFecFinal().getTime());
 		Conexion conex= new Conexion();
+
+		String comprobarCodigosBD = "SELECT * FROM reservas WHERE reCodigo = ?";
+		String consulta = "INSERT INTO reservas VALUES (?, ?, ?)";
 		try {
-			String consulta = "INSERT INTO reservas VALUES (?, ?, ?)";
-			PreparedStatement ps = conex.getConnection().prepareStatement(consulta);
-			ps.setInt(1,reserva.getCodigo());
-			ps.setDate(2, fecInicio);
-			ps.setDate(3, fecFinal);
-			int filas = ps.executeUpdate();
+			PreparedStatement ps = conex.getConnection().prepareStatement(comprobarCodigosBD);
+			ps.setInt(1, codigo);
+			ResultSet resultSet=ps.executeQuery();
+			if(resultSet.next()) {
+				existe = true;
+			} else {
+				existe = false;
+			}
+
+			if(existe){
+				JOptionPane.showMessageDialog(null, "El código de reserva introducido ya existe en la base de datos.","Información",JOptionPane.INFORMATION_MESSAGE);
+				return;
+			}
+
+			PreparedStatement ps1 = conex.getConnection().prepareStatement(consulta);
+			ps1.setInt(1, codigo);
+			ps1.setDate(2, fecInicio);
+			ps1.setDate(3, fecFinal);
+			int filas = ps1.executeUpdate();
 			//JOptionPane.showMessageDialog(null, "Se han guardado los datos correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
-			ps.close();
+			ps1.close();
 			conex.desconectar();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
