@@ -12,7 +12,48 @@ import modeloVo.Involucra;
 import modeloVo.Reserva;
 
 public class InvolucraDao {
-	
+
+	public boolean existeCliente(String codigo){
+		boolean existe = false;
+		Conexion conex= new Conexion();
+		String comprobarCodigosBD = "SELECT * FROM involucra WHERE inCliente = ?";
+
+		try {
+			PreparedStatement ps = conex.getConnection().prepareStatement(comprobarCodigosBD);
+			ps.setString(1, codigo);
+			ResultSet resultSet=ps.executeQuery();
+			if(resultSet.next()) {
+				existe = true;
+			} else {
+				existe = false;
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return existe;
+	}
+
+
+	public boolean existeCoche(String codigo){
+		boolean existe = false;
+		Conexion conex= new Conexion();
+		String comprobarCodigosBD = "SELECT * FROM involucra WHERE inMatricula = ?";
+
+		try {
+			PreparedStatement ps = conex.getConnection().prepareStatement(comprobarCodigosBD);
+			ps.setString(1, codigo);
+			ResultSet resultSet=ps.executeQuery();
+			if(resultSet.next()) {
+				existe = true;
+			} else {
+				existe = false;
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return existe;
+	}
+
 	public void insertarInvolucra (Involucra involucra, int codigoReserva){
 		boolean existe = false;
 		Conexion conex= new Conexion();
@@ -51,24 +92,24 @@ public class InvolucraDao {
 
 
 	public void eliminarInvolucra (String codigo) throws SQLException {
-		/*int res = JOptionPane.showOptionDialog(new JFrame(), "¿Estás seguro que quieres eliminar éste cliente?", "Options",
+		int res = JOptionPane.showOptionDialog(new JFrame(), "¿Estás seguro que deseas cancelar la reserva?", "Options",
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-				new Object[] { "Continuar", "Cancelar" }, JOptionPane.YES_OPTION);
+				new Object[] { "Sí, estoy seguro", "Volver atrás" }, JOptionPane.YES_OPTION);
 
 		if (res == JOptionPane.YES_OPTION) {
-			Conexion conex= new Conexion();
-			try {*/
-		Conexion conex= new Conexion();
-		String consulta = "DELETE FROM involucra WHERE inMatricula= ?";
-		PreparedStatement ps = conex.getConnection().prepareStatement(consulta);
-		ps.setString(1, codigo);
-		ps.executeUpdate();
-		ps.close();
-		conex.desconectar();
-			/*} catch (SQLException e) {
+			Conexion conex = new Conexion();
+			try {
+				String consulta = "DELETE FROM involucra WHERE inMatricula= ?";
+				PreparedStatement ps = conex.getConnection().prepareStatement(consulta);
+				ps.setString(1, codigo);
+				ps.executeUpdate();
+				ps.close();
+				conex.desconectar();
+			} catch (SQLException e) {
 				System.out.println(e.getMessage());
 				JOptionPane.showMessageDialog(null, "Error, no se pudo eliminar el cliente");
-			}*/
+			}
+		}
 	}
 
 

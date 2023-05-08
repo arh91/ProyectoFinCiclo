@@ -237,13 +237,9 @@ public class Form02NuevaReserva extends JFrame {
 			Reserva reserva = new Reserva();
 			Involucra involucra = new Involucra();
 
-			if(controlador.existeMatriculaCoche(matriculaCoche)==false){
-				JOptionPane.showMessageDialog(null, "No disponemos de ningún coche con la matrícula "+matriculaCoche);
-			}
-
 			controlador.preguntarDisponibilidadCoche(matriculaCoche, coche);
 
-			if(coche.isDisponible()==false) {
+			if(coche.isDisponible()==true) {
 				JOptionPane.showMessageDialog(null, "Lo sentimos, el coche seleccionado no se encuentra disponible para las fechas que usted ha seleccionado.");
 			}else {
 				controlador.reservarCoche(fechaInicio, fechaFinal, matriculaCoche);
@@ -259,15 +255,21 @@ public class Form02NuevaReserva extends JFrame {
 	private class CancelButtonActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			datosCancelacion();
-			try {
-				controlador.eliminarInvolucra(matriculaCoche);
-			} catch (SQLException e) {
-				throw new RuntimeException(e);
+			if (controlador.existeCliente(dniCliente) == false){
+				JOptionPane.showMessageDialog(null, "Ningún cliente con dni "+dniCliente+" ha hecho una reserva.","Información",JOptionPane.INFORMATION_MESSAGE);
+			}if (controlador.existeCoche(matriculaCoche) == false){
+				JOptionPane.showMessageDialog(null, "No existen reservas del coche con matrícula "+matriculaCoche+".","Información",JOptionPane.INFORMATION_MESSAGE);
+			}if (controlador.existeCliente(dniCliente) == true && controlador.existeCoche(matriculaCoche) == true) {
+				try {
+					controlador.eliminarInvolucra(matriculaCoche);
+				} catch (SQLException e) {
+					throw new RuntimeException(e);
+				}
+				controlador.eliminarReserva(codigoReservaCancelar);
+				controlador.liberarCoche(matriculaCoche);
 			}
-			controlador.eliminarReserva(codigoReservaCancelar);
-			controlador.liberarCoche(matriculaCoche);
+			}
 		}
-	}
 
 
 	private class AtrasButtonActionListener implements ActionListener {
@@ -280,10 +282,13 @@ public class Form02NuevaReserva extends JFrame {
 	private void modificarFechaInicio(){
 		fechaInicioModificada = textFecInicial.getText();
 		String[] arrFecInicial = fechaInicioModificada.split("/");
-		String[] arrFecInicialModificado = {};
-
+		String[] arrFecInicialModificado = new String[3];
+		System.out.println(arrFecInicial[0]);
+		System.out.println(arrFecInicial[1]);
+		System.out.println(arrFecInicial[2]);
 		int j=0;
 		for(int i= arrFecInicial.length-1; i>=0; i--){
+
 			arrFecInicialModificado[j] = arrFecInicial[i];
 			j++;
 		}
@@ -298,7 +303,7 @@ public class Form02NuevaReserva extends JFrame {
 	private void modificarFechaFin(){
 		fechaFinModificada = textFecFinal.getText();
 		String[] arrFecFinal = fechaFinModificada.split("/");
-		String[] arrFecFinalModificado = {};
+		String[] arrFecFinalModificado = new String[3];
 
 		int k=0;
 		for(int i=arrFecFinal.length-1; i>=0; i--){
@@ -316,7 +321,7 @@ public class Form02NuevaReserva extends JFrame {
 	private void modificarFechaInicioCanc(){
 		fechaInicioModificadaCanc = textField_Fecha_Inicio.getText();
 		String[] arrFecInicialCanc = fechaInicioModificadaCanc.split("/");
-		String[] arrFecInicialModificadoCanc = {};
+		String[] arrFecInicialModificadoCanc = new String[3];
 
 		int j=0;
 		for(int i= arrFecInicialCanc.length-1; i>=0; i--){
@@ -334,7 +339,7 @@ public class Form02NuevaReserva extends JFrame {
 	private void modificarFechaFinCanc(){
 		fechaFinModificadaCanc = textField_fecha_final.getText();
 		String[] arrFecFinalCanc = fechaFinModificadaCanc.split("/");
-		String[] arrFecFinalModificadoCanc = {};
+		String[] arrFecFinalModificadoCanc = new String[3];
 
 		int k=0;
 		for(int i=arrFecFinalCanc.length-1; i>=0; i--){
@@ -395,6 +400,5 @@ public class Form02NuevaReserva extends JFrame {
 
 		codigoReservaCancelar = involucra.getReserva();
 	}
-
 
 }

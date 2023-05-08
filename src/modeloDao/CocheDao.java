@@ -65,7 +65,6 @@ public class CocheDao {
 				}
 		} catch (SQLException e) {
 				System.out.println(e.getMessage());
-				JOptionPane.showMessageDialog(null, "Error, no se han podido guardar los datos");
 			}
 		return existe;
 	}
@@ -82,7 +81,7 @@ public class CocheDao {
 			ResultSet res = ps.executeQuery();
 			while(res.next()){
 				existe=true;
-				coche.setDisponible(res.getBoolean(1));
+				coche.setDisponible(res.getBoolean(6));
 			}
 			res.close();
 			conex.desconectar();
@@ -113,6 +112,12 @@ public class CocheDao {
 				+ " END)"
 				+ " WHERE coMatricula = "+cadena+"";
 		PreparedStatement ps = null;
+		try {
+			ps = conexion.getConnection().prepareStatement(consulta);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		;
 		try {
 			ps.executeUpdate();
 		} catch (SQLException e) {

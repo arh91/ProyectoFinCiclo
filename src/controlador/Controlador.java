@@ -105,7 +105,7 @@ public class Controlador {
 	}
 	
 	///////////////////////////////////////////////////////////////////////
-	
+
 	public void insertarCliente(Cliente cliente, String codigo) {
 		clienteDao.insertarCliente(cliente, codigo);
 	}
@@ -149,7 +149,15 @@ public class Controlador {
 	public void preguntarDisponibilidadCoche(String codigo, Coche coche) {
 		cocheDao.preguntarDisponibilidadCoche(codigo, coche);
 	}
-	
+
+	public boolean existeCliente(String codigo){
+		return involucraDao.existeCliente(codigo);
+	}
+
+	public boolean existeCoche(String codigo){
+		return involucraDao.existeCoche(codigo);
+	}
+
 	public void insertarInvolucra(Involucra involucra, int codigoReserva) {
 		involucraDao.insertarInvolucra(involucra, codigoReserva);
 	}

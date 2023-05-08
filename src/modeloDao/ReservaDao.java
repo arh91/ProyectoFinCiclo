@@ -56,25 +56,27 @@ public class ReservaDao {
 
 
 	public void eliminarReserva (int codigo){
-		int res = JOptionPane.showOptionDialog(new JFrame(), "¿Estás seguro que desea cancelar la reserva?", "Options",
+		/*int res = JOptionPane.showOptionDialog(new JFrame(), "¿Estás seguro que desea cancelar la reserva?", "Options",
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
 				new Object[] { "Sí, estoy seguro", "Volver atrás" }, JOptionPane.YES_OPTION);
 
 		if (res == JOptionPane.YES_OPTION) {
-			Conexion conex= new Conexion();
+			Conexion conex= new Conexion();*/
 			try {
+				Conexion conex= new Conexion();
 				String consulta = "DELETE FROM reservas WHERE reCodigo= ?";
-				PreparedStatement ps = conex.getConnection().prepareStatement(consulta);
+				PreparedStatement ps = null;
+				ps = conex.getConnection().prepareStatement(consulta);
 				ps.setInt(1, codigo);
 				ps.executeUpdate();
-				JOptionPane.showMessageDialog(null, " La reserva se ha cancelado Correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+				//JOptionPane.showMessageDialog(null, " La reserva se ha cancelado Correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
 				ps.close();
 				conex.desconectar();
 			} catch (SQLException e) {
 				System.out.println(e.getMessage());
 				JOptionPane.showMessageDialog(null, "Error, no se pudo cancelar la reserva");
 			}
-		}
+		//}
 	}
 	
 	

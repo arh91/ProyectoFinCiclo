@@ -22,7 +22,7 @@ public class ConvertirFechas {
 	public static String convertirDateString(Date fec){
 		try{
 			// Obtenemos solamente la fecha pero usamos slash en lugar de guiones
-			DateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
+			DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd");
 			String fecConvertida = fecha.format(fec);
 			return fecConvertida;
 		}catch(NullPointerException np){
@@ -37,7 +37,7 @@ public class ConvertirFechas {
 	public static Date convertirStringDate(String fecNac){
 		try{
 			// convertir la fecha de un String a un tipo Date
-			SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
 			Date fechaNac = (Date) formatoDelTexto.parse(fecNac);
 			return fechaNac;
 		}catch(ParseException pe){
