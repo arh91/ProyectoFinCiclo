@@ -57,7 +57,7 @@ public class ModeloTablaClientes extends AbstractTableModel{
 	}
 
 	public void ListadoClientes(String localidad) {
-		controlador.cargarClientesPorLocalidad(localidad);
+		filaCliente = controlador.cargarClientesPorLocalidad(localidad);
 	}
 	
 	/*public void ListadoReservasEnero() {

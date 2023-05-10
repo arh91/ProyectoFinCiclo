@@ -32,6 +32,7 @@ public class Form05ListadoClientes extends JFrame {
 	private ArrayList<String> direcciones = new ArrayList<String>();
 	private ArrayList<String> localidades = new ArrayList<String>();
 	private ArrayList<String> localidadesFinal = new ArrayList<String>();
+	private String localidad;
 	
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
@@ -110,23 +111,15 @@ public class Form05ListadoClientes extends JFrame {
 				
 	}
 	
-	private class ComboMesActionListener implements ActionListener {
+	/*private class ComboMesActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			
 		}
-	}
+	}*/
 	private class OkButtonActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			ListadoClientes("Madrid");
-			/*for(int i=0; i<localidadesFinal.size(); i++) {
-				ListadoClientes(localidadesFinal.get(i));
-			}*/
-			/*if(localidadesClientes.getSelectedItem() == localidad) {
-				for (int i=0; i<direcciones.size(); i++){
-					String arr[] = direcciones.get(i).split(",");
-				}*/
-					
-				
+			localidad = String.valueOf(localidadesClientes.getSelectedItem());
+			ListadoClientes(localidad);
 		}
 	}
 	private class AtrasButtonActionListener implements ActionListener {
@@ -136,35 +129,6 @@ public class Form05ListadoClientes extends JFrame {
 		}
 	}
 	
-	
-	/*private void cargarTabla() {
-		if (provinciasClientes.getSelectedItem() == "Enero") {
-			ReservasEnero();
-		}else if(provinciasClientes.getSelectedItem() == "Febrero") {
-			ReservasFebrero();
-		}else if(provinciasClientes.getSelectedItem() == "Marzo") {
-			ReservasMarzo();
-		}else if(provinciasClientes.getSelectedItem() == "Abril") {
-			ReservasAbril();
-		}else if(provinciasClientes.getSelectedItem() == "Mayo") {
-			ReservasMayo();
-		}else if(provinciasClientes.getSelectedItem() == "Junio") {
-			ReservasJunio();
-		}else if(provinciasClientes.getSelectedItem() == "Julio") {
-			ReservasJulio();
-		}else if(provinciasClientes.getSelectedItem() == "Agosto") {
-			ReservasAgosto();
-		}else if(provinciasClientes.getSelectedItem() == "Septiembre") {
-			ReservasSeptiembre();
-		}else if(provinciasClientes.getSelectedItem() == "Octubre") {
-			ReservasOctubre();
-		}else if(provinciasClientes.getSelectedItem() == "Noviembre") {
-			ReservasNoviembre();
-		}else {
-			ReservasDiciembre();
-		}
-	}*/
-	
 	private void obtenerDirecciones() {
 		controlador.obtenerDireccionesClientes(direcciones);
 		int i=0;
@@ -173,9 +137,7 @@ public class Form05ListadoClientes extends JFrame {
 			String localidad = arrayLocalidades[arrayLocalidades.length-1];
 			localidades.add(localidad);
 		}
-		
-		//ArrayList<String> localidadesFinal = new ArrayList<String>();
-		
+
 		for(String l:localidades){
 			if(localidadesFinal.contains(l)) {
 				continue;
@@ -187,90 +149,12 @@ public class Form05ListadoClientes extends JFrame {
 		
 	}
 	
-	private void ListadoClientes(String localidad) {				
-		
-		//if(localidadesClientes.getSelectedItem() == localidad) {
-			miModelo = new ModeloTablaClientes();				
-			tabla_Clientes = new JTable(miModelo);					
-			miModelo.ListadoClientes(localidad);	
-			scrollPane.setViewportView(tabla_Clientes);				
-		//}
+	private void ListadoClientes(String localidad) {
+		miModelo = new ModeloTablaClientes();
+		tabla_Clientes = new JTable(miModelo);
+		miModelo.ListadoClientes(localidad);
+		scrollPane.setViewportView(tabla_Clientes);
 	}
 	
-	/*private void ReservasFebrero() {				
-		miModelo = new ModeloTablaReservas();				
-		table_1 = new JTable(miModelo);					
-		miModelo.ListadoReservasFebrero();	
-		scrollPane.setViewportView(table_1);				
-	}
-	
-	private void ReservasMarzo() {				
-		miModelo = new ModeloTablaReservas();				
-		table_1 = new JTable(miModelo);					
-		miModelo.ListadoReservasMarzo();	
-		scrollPane.setViewportView(table_1);				
-	}
-	
-	private void ReservasAbril() {				
-		miModelo = new ModeloTablaReservas();				
-		table_1 = new JTable(miModelo);					
-		miModelo.ListadoReservasAbril();	
-		scrollPane.setViewportView(table_1);				
-	}
-	
-	private void ReservasMayo() {				
-		miModelo = new ModeloTablaReservas();				
-		table_1 = new JTable(miModelo);					
-		miModelo.ListadoReservasMayo();	
-		scrollPane.setViewportView(table_1);				
-	}
-	
-	private void ReservasJunio() {				
-		miModelo = new ModeloTablaReservas();				
-		table_1 = new JTable(miModelo);					
-		miModelo.ListadoReservasJunio();	
-		scrollPane.setViewportView(table_1);				
-	}
-	
-	private void ReservasJulio() {				
-		miModelo = new ModeloTablaReservas();				
-		table_1 = new JTable(miModelo);					
-		miModelo.ListadoReservasJulio();	
-		scrollPane.setViewportView(table_1);				
-	}
-	
-	private void ReservasAgosto() {				
-		miModelo = new ModeloTablaReservas();				
-		table_1 = new JTable(miModelo);					
-		miModelo.ListadoReservasAgosto();	
-		scrollPane.setViewportView(table_1);				
-	}
-	
-	private void ReservasSeptiembre() {				
-		miModelo = new ModeloTablaReservas();				
-		table_1 = new JTable(miModelo);					
-		miModelo.ListadoReservasSeptiembre();	
-		scrollPane.setViewportView(table_1);				
-	}
-	
-	private void ReservasOctubre() {				
-		miModelo = new ModeloTablaReservas();				
-		table_1 = new JTable(miModelo);					
-		miModelo.ListadoReservasOctubre();	
-		scrollPane.setViewportView(table_1);				
-	}
-	
-	private void ReservasNoviembre() {				
-		miModelo = new ModeloTablaReservas();				
-		table_1 = new JTable(miModelo);					
-		miModelo.ListadoReservasNoviembre();	
-		scrollPane.setViewportView(table_1);				
-	}
-	
-	private void ReservasDiciembre() {				
-		miModelo = new ModeloTablaReservas();				
-		table_1 = new JTable(miModelo);					
-		miModelo.ListadoReservasDiciembre();	
-		scrollPane.setViewportView(table_1);				
-	}*/
+
 }

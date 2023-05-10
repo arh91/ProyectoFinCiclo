@@ -233,7 +233,7 @@ public class ClienteDao {
 	public ArrayList<FilaCliente> cargarClientesPorLocalidad(String localidad) {
 		Conexion conexion = new Conexion();
 		
-		String consulta = "select * from clientes where clDireccion like ?";
+		String consulta = "SELECT * FROM clientes WHERE clDireccion LIKE ?";
 		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -243,7 +243,8 @@ public class ClienteDao {
 		
 		try {
 			ps = conexion.getConnection().prepareStatement(consulta);
-			ps.setString(1, "%" + str);
+			//ps.setString(1, "%" + str);
+			ps.setString(1, "%" + localidad);
 			
 			rs = ps.executeQuery();
 			
