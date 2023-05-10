@@ -82,43 +82,59 @@ Form03ListadoReservas extends JFrame {
 		
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 70, 842, 109);
+		scrollPane.setBounds(12, 70, 842, 179);
 		contentPanel.add(scrollPane);
 		
 		table_1 = new JTable();
 		scrollPane.setColumnHeaderView(table_1);
 		
-		{
+		/*{
 			JPanel panel_1 = new JPanel();
 			panel_1.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Resumen Mes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel_1.setBounds(12, 200, 842, 50);
+			panel_1.setBounds(12, 200, 842, 67);
 			contentPanel.add(panel_1);
 			panel_1.setLayout(null);
-			
+
 			textFieldPrecioMedio = new JTextField();
 			textFieldPrecioMedio.setHorizontalAlignment(SwingConstants.CENTER);
-			textFieldPrecioMedio.setBounds(334, 13, 116, 22);
+			textFieldPrecioMedio.setBounds(348, 30, 116, 22);
 			panel_1.add(textFieldPrecioMedio);
 			textFieldPrecioMedio.setColumns(10);
-			
+
 			textDiasMedia = new JTextField();
 			textDiasMedia.setHorizontalAlignment(SwingConstants.CENTER);
-			textDiasMedia.setBounds(495, 15, 116, 22);
+			textDiasMedia.setBounds(537, 30, 116, 22);
 			panel_1.add(textDiasMedia);
 			textDiasMedia.setColumns(10);
-			
+
 			textTotalMes = new JTextField();
 			textTotalMes.setHorizontalAlignment(SwingConstants.CENTER);
-			textTotalMes.setBounds(714, 13, 116, 22);
+			textTotalMes.setBounds(714, 30, 116, 22);
 			panel_1.add(textTotalMes);
 			textTotalMes.setColumns(10);
-			
+
 			textNumAlquileres = new JTextField();
 			textNumAlquileres.setHorizontalAlignment(SwingConstants.CENTER);
-			textNumAlquileres.setBounds(172, 13, 116, 22);
+			textNumAlquileres.setBounds(175, 30, 116, 22);
 			panel_1.add(textNumAlquileres);
 			textNumAlquileres.setColumns(10);
-		}
+
+			JLabel lblNumAlquileres = new JLabel("Número Alquileres");
+			lblNumAlquileres.setBounds(182, 10, 120, 13);
+			panel_1.add(lblNumAlquileres);
+
+			JLabel lblPrecioMedio = new JLabel("Precio Medio");
+			lblPrecioMedio.setBounds(369, 10, 100, 13);
+			panel_1.add(lblPrecioMedio);
+
+			JLabel lblMediaDias = new JLabel("Media Días Reserva");
+			lblMediaDias.setBounds(529, 10, 124, 13);
+			panel_1.add(lblMediaDias);
+
+			JLabel lblTotalMes = new JLabel("Total Mes");
+			lblTotalMes.setBounds(731, 10, 100, 13);
+			panel_1.add(lblTotalMes);
+		}*/
 
 	
 

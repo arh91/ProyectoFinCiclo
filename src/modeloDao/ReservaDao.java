@@ -9,10 +9,7 @@ import java.sql.Date;
 import javax.swing.*;
 
 import conexion.Conexion;
-import modeloVo.Cliente;
-import modeloVo.FilaReserva;
-import modeloVo.Involucra;
-import modeloVo.Reserva;
+import modeloVo.*;
 import validaciones.ConvertirFechas;
 
 public class ReservaDao {
@@ -570,4 +567,40 @@ public class ReservaDao {
 		
 		return reserva;
 	}
+
+
+	/*public Double SumaAlquileres() {
+		Conexion conexion = new Conexion();
+
+		String consulta = "select sum(coPrecio*)";
+
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		ArrayList <FilaCliente> cliente = new ArrayList<FilaCliente>();
+		String str = localidad;
+
+		try {
+			ps = conexion.getConnection().prepareStatement(consulta);
+			//ps.setString(1, "%" + str);
+			ps.setString(1, "%" + localidad);
+
+			rs = ps.executeQuery();
+
+			while(rs.next()) {
+				FilaCliente fila = new FilaCliente();
+				fila.setNifCliente(rs.getString(1));
+				fila.setNombreCliente(rs.getString(2));
+				fila.setDireccionCliente(rs.getString(3));
+				fila.setTelefonoCliente(rs.getInt(4));
+
+				cliente.add(fila);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		conexion.desconectar();
+
+		return cliente;
+	}*/
 }

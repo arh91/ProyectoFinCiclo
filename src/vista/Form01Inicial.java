@@ -55,27 +55,27 @@ public class Form01Inicial extends JFrame{
 		
 		JButton btnNuevaReserva = new JButton("Nueva Reserva");
 		btnNuevaReserva.addActionListener(new BtnNuevaReservaActionListener());
-		btnNuevaReserva.setBounds(57, 29, 120, 25);
+		btnNuevaReserva.setBounds(57, 29, 140, 25);
 		getContentPane().add(btnNuevaReserva);
 		
 		JButton btnListadoReservas = new JButton("Listado Reserva");
 		btnListadoReservas.addActionListener(new BtnListadoReservasActionListener());
-		btnListadoReservas.setBounds(251, 29, 120, 25);
+		btnListadoReservas.setBounds(251, 29, 140, 25);
 		getContentPane().add(btnListadoReservas);
 		
 		JButton btnListadoClientes = new JButton("Listado Clientes");
 		btnListadoClientes.addActionListener(new BtnListadoClientesActionListener());
-		btnListadoClientes.setBounds(57, 120, 120, 25);
+		btnListadoClientes.setBounds(57, 120, 140, 25);
 		getContentPane().add(btnListadoClientes);
 		
 		JButton btnClientes = new JButton("Clientes");
 		btnClientes.addActionListener(new BtnClientesActionListener());
-		btnClientes.setBounds(251, 120, 120, 25);
+		btnClientes.setBounds(251, 120, 140, 25);
 		getContentPane().add(btnClientes);
 		
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new BtnSalirActionListener());
-		btnSalir.setBounds(155, 201, 120, 25);
+		btnSalir.setBounds(155, 201, 140, 25);
 		getContentPane().add(btnSalir);
 	}
 	
