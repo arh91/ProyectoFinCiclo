@@ -76,6 +76,7 @@ public class Form06MasOpcionesCliente extends JFrame{
 		getContentPane().setLayout(null);
 		
 		textField_primer_apellido = new JTextField();
+		textField_primer_apellido.setEditable(false);
 		textField_primer_apellido.setBounds(129, 110, 96, 19);
 		getContentPane().add(textField_primer_apellido);
 		textField_primer_apellido.setColumns(10);
@@ -85,7 +86,7 @@ public class Form06MasOpcionesCliente extends JFrame{
 		getContentPane().add(label_nombre);
 		
 		JLabel label_primer_apellido = new JLabel("Primer Apellido");
-		label_primer_apellido.setBounds(28, 113, 85, 13);
+		label_primer_apellido.setBounds(28, 113, 110, 13);
 		getContentPane().add(label_primer_apellido);
 		
 		JLabel label_nif = new JLabel("NIF");
@@ -101,7 +102,7 @@ public class Form06MasOpcionesCliente extends JFrame{
 		getContentPane().add(label_numero);
 		
 		JLabel label_telefono = new JLabel("Teléfono");
-		label_telefono.setBounds(28, 249, 45, 13);
+		label_telefono.setBounds(28, 249, 70, 13);
 		getContentPane().add(label_telefono);
 		
 		textField_nombre = new JTextField();
@@ -135,7 +136,7 @@ public class Form06MasOpcionesCliente extends JFrame{
 		
 		JLabel lblLocalidad = new JLabel("Localidad");
 		lblLocalidad.setAutoscrolls(true);
-		lblLocalidad.setBounds(28, 215, 45, 13);
+		lblLocalidad.setBounds(28, 215, 60, 13);
 		getContentPane().add(lblLocalidad);
 		
 		textField_localidad = new JTextField();
@@ -146,7 +147,7 @@ public class Form06MasOpcionesCliente extends JFrame{
 		
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new BtnBuscarActionListener());
-		btnBuscar.setBounds(297, 89, 85, 21);
+		btnBuscar.setBounds(297, 89, 100, 21);
 		getContentPane().add(btnBuscar);
 		
 		JButton btnOk = new JButton("Ok");
@@ -161,12 +162,12 @@ public class Form06MasOpcionesCliente extends JFrame{
 		
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.addActionListener(new BtnEliminarActionListener());
-		btnEliminar.setBounds(297, 143, 85, 21);
+		btnEliminar.setBounds(297, 143, 100, 21);
 		getContentPane().add(btnEliminar);
 		
 		JButton btnModificar = new JButton("Modificar");
 		btnModificar.addActionListener(new BtnModificarActionListener());
-		btnModificar.setBounds(297, 196, 85, 21);
+		btnModificar.setBounds(297, 196, 100, 21);
 		getContentPane().add(btnModificar);
 	}
 	

@@ -83,7 +83,7 @@ public class Form04Cliente extends JFrame{
 		getContentPane().add(label_nombre);
 		
 		JLabel label_primer_apellido = new JLabel("Primer Apellido");
-		label_primer_apellido.setBounds(28, 113, 85, 13);
+		label_primer_apellido.setBounds(28, 113, 110, 13);
 		getContentPane().add(label_primer_apellido);
 		
 		JLabel label_nif = new JLabel("NIF");
@@ -99,7 +99,7 @@ public class Form04Cliente extends JFrame{
 		getContentPane().add(label_numero);
 		
 		JLabel label_telefono = new JLabel("Teléfono");
-		label_telefono.setBounds(28, 249, 45, 13);
+		label_telefono.setBounds(28, 249, 70, 13);
 		getContentPane().add(label_telefono);
 		
 		textField_nombre = new JTextField();
@@ -144,7 +144,7 @@ public class Form04Cliente extends JFrame{
 		
 		JLabel lblLocalidad = new JLabel("Localidad");
 		lblLocalidad.setAutoscrolls(true);
-		lblLocalidad.setBounds(28, 215, 45, 13);
+		lblLocalidad.setBounds(28, 215, 70, 13);
 		getContentPane().add(lblLocalidad);
 		
 		textField_localidad = new JTextField();

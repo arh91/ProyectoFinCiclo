@@ -110,12 +110,7 @@ public class Form05ListadoClientes extends JFrame {
 		}
 				
 	}
-	
-	/*private class ComboMesActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-			
-		}
-	}*/
+
 	private class OkButtonActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			localidad = String.valueOf(localidadesClientes.getSelectedItem());
@@ -126,6 +121,14 @@ public class Form05ListadoClientes extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			dispose();
 			controlador.mostrarF01Inicial();
+		}
+	}
+
+	private void centrarTextoTabla(JTable table){
+		DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+		tcr.setHorizontalAlignment(SwingConstants.CENTER);
+		for(int i=0; i<4; i++) {
+			tabla_Clientes.getColumnModel().getColumn(i).setCellRenderer(tcr);
 		}
 	}
 	
@@ -152,6 +155,7 @@ public class Form05ListadoClientes extends JFrame {
 	private void ListadoClientes(String localidad) {
 		miModelo = new ModeloTablaClientes();
 		tabla_Clientes = new JTable(miModelo);
+		centrarTextoTabla(tabla_Clientes);
 		miModelo.ListadoClientes(localidad);
 		scrollPane.setViewportView(tabla_Clientes);
 	}

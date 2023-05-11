@@ -87,7 +87,7 @@ public class Form02NuevaReserva extends JFrame {
 	 */
 	public Form02NuevaReserva() {
 		System.out.println(todaysDate);
-		setTitle("Reserva Coches");
+		setTitle("Nueva Reserva");
 		setBounds(100, 100, 869, 455);
 		getContentPane().setLayout(new BorderLayout());
 		setExtendedState(JFrame.NORMAL);
@@ -165,12 +165,12 @@ public class Form02NuevaReserva extends JFrame {
 		contentPanel.add(panel_Cancelar_Reserva);
 		panel_Cancelar_Reserva.setLayout(null);
 
-		JLabel labelNifCliente = new JLabel("NIF Cliente");
+		JLabel labelNifCliente = new JLabel("NIF Cliente:");
 		labelNifCliente.setBounds(51, 29, 66, 13);
 		panel_Cancelar_Reserva.add(labelNifCliente);
 
-		JLabel labelFechaInicio = new JLabel("Fecha Iniciak (DD/MM/AAAA)");
-		labelFechaInicio.setBounds(50, 70, 154, 13);
+		JLabel labelFechaInicio = new JLabel("Fecha Inicial (DD/MM/AAAA):");
+		labelFechaInicio.setBounds(50, 70, 164, 13);
 		panel_Cancelar_Reserva.add(labelFechaInicio);
 
 		textField_nif_cliente = new JTextField();
@@ -197,12 +197,12 @@ public class Form02NuevaReserva extends JFrame {
 		textField_fecha_final.setBounds(636, 67, 116, 22);
 		panel_Cancelar_Reserva.add(textField_fecha_final);
 
-		JLabel lblNewLabel_2 = new JLabel("Matrívula Vehículo");
-		lblNewLabel_2.setBounds(441, 29, 101, 13);
+		JLabel lblNewLabel_2 = new JLabel("Matrícula Vehículo:");
+		lblNewLabel_2.setBounds(441, 29, 116, 13);
 		panel_Cancelar_Reserva.add(lblNewLabel_2);
 
-		JLabel labelFechaFin = new JLabel("Final (DD/MM/AAAAA");
-		labelFechaFin.setBounds(441, 71, 154, 13);
+		JLabel labelFechaFin = new JLabel("Fecha Final (DD/MM/AAAAA):");
+		labelFechaFin.setBounds(441, 71, 174, 13);
 		panel_Cancelar_Reserva.add(labelFechaFin);
 		{
 			JPanel buttonPane = new JPanel();
