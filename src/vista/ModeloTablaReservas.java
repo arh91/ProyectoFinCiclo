@@ -6,43 +6,37 @@ import modeloVo.FilaReserva;
 import javax.swing.table.AbstractTableModel;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 
 public class ModeloTablaReservas extends AbstractTableModel{
 
-	ArrayList <FilaReserva> filaReserva = null;
-	ArrayList <String> nombresColumnas = null;
+	ArrayList <FilaReserva> filaReserva = new ArrayList <FilaReserva>();
+	private String[] nombresColumnas = {"Cliente", "Matrícula", "Precio", "Días", "Importe"};
 	 Controlador controlador = new Controlador();
-	
-	
 
 	public ModeloTablaReservas() {
-		nombresColumnas = new ArrayList <String>();
-		
-		nombresColumnas.add("Cliente");
-		nombresColumnas.add("Matr�cula");
-		nombresColumnas.add("Precio");
-		nombresColumnas.add("D�as");
-		nombresColumnas.add("Importe");
-		
 		filaReserva = new ArrayList <FilaReserva>();
-		
 	}
 
-	public int getColumnCount() {		
-		return nombresColumnas.size();
+	public int getColumnCount() {
+		return nombresColumnas.length;
 	}
 
 	public int getRowCount() {
 		// TODO Auto-generated method stub
 		return filaReserva.size();
 	}
+
+	public String getColumnName(int index){
+		return nombresColumnas[index];
+	}
 	
 	
 
 	public Object getValueAt(int fila, int columna) {
-FilaReserva reserva = filaReserva.get(fila);
+		FilaReserva reserva = filaReserva.get(fila);
 		
 		//poner formato a los numeros
 		NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.getDefault());

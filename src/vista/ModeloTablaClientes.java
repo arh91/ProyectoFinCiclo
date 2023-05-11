@@ -10,32 +10,27 @@ import java.util.Locale;
 
 public class ModeloTablaClientes extends AbstractTableModel{
 	ArrayList <FilaCliente> filaCliente = null;
-	ArrayList <String> nombresColumnas = null;
+	private String[] nombresColumnas = {"NIF", "Nombre", "Direccion", "Teléfono"};
 	 Controlador controlador = new Controlador();
 	
 	
 
 	public ModeloTablaClientes() {
-		nombresColumnas = new ArrayList <String>();
-		
-		nombresColumnas.add("NIF");
-		nombresColumnas.add("Nombre");
-		nombresColumnas.add("Direccion");
-		nombresColumnas.add("Telefono");
-		
 		filaCliente = new ArrayList <FilaCliente>();
 	}
 
 	public int getColumnCount() {		
-		return nombresColumnas.size();
+		return nombresColumnas.length;
 	}
 
 	public int getRowCount() {
 		// TODO Auto-generated method stub
 		return filaCliente.size();
 	}
-	
-	
+
+	public String getColumnName(int index){
+		return nombresColumnas[index];
+	}
 
 	public Object getValueAt(int fila, int columna) {
 		FilaCliente fc = filaCliente.get(fila);
@@ -51,7 +46,7 @@ public class ModeloTablaClientes extends AbstractTableModel{
 		case 2:
 			return fc.getDireccionCliente();
 		case 3:
-			return nf.format(fc.getTelefonoCliente());
+			return fc.getTelefonoCliente();
 		}
 		return fc;
 	}
@@ -59,52 +54,5 @@ public class ModeloTablaClientes extends AbstractTableModel{
 	public void ListadoClientes(String localidad) {
 		filaCliente = controlador.cargarClientesPorLocalidad(localidad);
 	}
-	
-	/*public void ListadoReservasEnero() {
-		cliente = controlador.ReservasEnero();		
-	}
-	
-	public void ListadoReservasFebrero() {
-		cliente = controlador.ReservasFebrero();		
-	}
-	
-	public void ListadoReservasMarzo() {
-		cliente = controlador.ReservasMarzo();		
-	}
-	
-	public void ListadoReservasAbril() {
-		cliente = controlador.ReservasAbril();		
-	}
-	
-	public void ListadoReservasMayo() {
-		cliente = controlador.ReservasMayo();		
-	}
-	
-	public void ListadoReservasJunio() {
-		cliente = controlador.ReservasJunio();		
-	}
-	
-	public void ListadoReservasJulio() {
-		cliente = controlador.ReservasJulio();		
-	}
-	
-	public void ListadoReservasAgosto() {
-		cliente = controlador.ReservasAgosto();		
-	}
-	
-	public void ListadoReservasSeptiembre() {
-		cliente = controlador.ReservasSeptiembre();		
-	}
-	
-	public void ListadoReservasOctubre() {
-		cliente = controlador.ReservasOctubre();		
-	}
-	
-	public void ListadoReservasNoviembre() {
-		cliente = controlador.ReservasNoviembre();		
-	}
-	
-	public void ListadoReservasDiciembre() {
-		cliente = controlador.ReservasDiciembre();		
-	}*/
+
 }

@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,6 +37,7 @@ Form03ListadoReservas extends JFrame {
 	private JComboBox meses;
 	private String[] mesesAnho = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 	private ModeloTablaReservas miModelo;
+	private ModeloTablaReservas reservas = new ModeloTablaReservas();
 	
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
@@ -86,6 +88,15 @@ Form03ListadoReservas extends JFrame {
 		contentPanel.add(scrollPane);
 		
 		table_1 = new JTable();
+		//scrollPane.setColumnHeaderView(table_1);
+		table_1.setModel(new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+						"Matr\u00EDcula Coche", "Cliente", "Precio Reserva", "N\u00FAmero D\u00EDas", "Precio DiarioN2Dias Reserva"
+				}
+		));
+		table_1.getColumnModel().getColumn(0).setPreferredWidth(86);
 		scrollPane.setColumnHeaderView(table_1);
 		
 		/*{
@@ -207,8 +218,15 @@ Form03ListadoReservas extends JFrame {
 	}
 	
 	private void ReservasEnero() {				
-		miModelo = new ModeloTablaReservas();				
-		table_1 = new JTable(miModelo);					
+		miModelo = new ModeloTablaReservas();
+		table_1 = new JTable(miModelo);
+
+		/*DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+		tcr.setHorizontalAlignment(SwingConstants.CENTER);
+		for(int i=1; i<6; i++) {
+			table_1.getColumnModel().getColumn(i).setCellRenderer(tcr);
+		}*/
+		//table_1.setModel(new ModeloTablaReservas(reservas.getNombresColumnas()));
 		miModelo.ListadoReservasEnero();	
 		scrollPane.setViewportView(table_1);				
 	}
