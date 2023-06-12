@@ -245,6 +245,10 @@ public class Form02NuevaReserva extends JFrame {
 				controlador.reservarCoche(fechaInicio, fechaFinal, matriculaCoche);
 				Reserva(reserva);
 				Involucra(involucra);
+				System.out.println("MATRÍCULA: "+matriculaCoche);
+				System.out.println("DNI CLIENTE: "+nifInvolucra);
+				System.out.println("CÓDIGO RESERVA: "+codigoReserva);
+				System.out.println("LITROS: "+litros);
 				codigoReserva = reserva.getCodigo();
 				controlador.insertarReserva(reserva, codigoReserva);
 				controlador.insertarInvolucra(involucra, codigoReserva);
@@ -261,7 +265,7 @@ public class Form02NuevaReserva extends JFrame {
 				JOptionPane.showMessageDialog(null, "No existen reservas del coche con matrícula "+matriculaCoche+".","Información",JOptionPane.INFORMATION_MESSAGE);
 			}if (controlador.existeCliente(dniCliente) == true && controlador.existeCoche(matriculaCoche) == true) {
 				try {
-					controlador.eliminarInvolucra(matriculaCoche);
+					controlador.eliminarInvolucra(codigoReservaCancelar);
 				} catch (SQLException e) {
 					throw new RuntimeException(e);
 				}
@@ -378,6 +382,11 @@ public class Form02NuevaReserva extends JFrame {
 
 		codigoReserva = Integer.parseInt(textCodReserva.getText());
 		litros = Integer.parseInt(textLitros.getText());
+
+		/*System.out.println("MATRÍCULA: "+matriculaCoche);
+		System.out.println("DNI CLIENTE: "+nifInvolucra);
+		System.out.println("CÓDIGO RESERVA: "+codigoReserva);
+		System.out.println("LITROS: "+litros);*/
 
 		involucra.setMatricula(matriculaCoche);
 		involucra.setCliente(nifInvolucra);

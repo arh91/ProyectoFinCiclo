@@ -58,8 +58,9 @@ public class InvolucraDao {
 		boolean existe = false;
 		Conexion conex= new Conexion();
 
+
 		String comprobarCodigosBD = "SELECT * FROM involucra WHERE inReserva = ?";
-		String consulta = "INSERT INTO clientes VALUES (?, ?, ?, ?)";
+		String consulta = "INSERT INTO involucra (inMatricula, inCliente, inReserva, inLitros) VALUES (?, ?, ?, ?)";
 		try {
 			PreparedStatement ps = conex.getConnection().prepareStatement(comprobarCodigosBD);
 			ps.setInt(1, codigoReserva);
@@ -76,10 +77,10 @@ public class InvolucraDao {
 
 
 			PreparedStatement ps1 = conex.getConnection().prepareStatement(consulta);
-			ps1.setString(2, involucra.getMatricula());
-			ps1.setString(3, involucra.getCliente());
-			ps1.setInt(4, involucra.getReserva());
-			ps1.setInt(5,  involucra.getLitros());
+			ps1.setString(1, involucra.getMatricula());
+			ps1.setString(2, involucra.getCliente());
+			ps1.setInt(3, involucra.getReserva());
+			ps1.setInt(4,  involucra.getLitros());
 			int filas = ps1.executeUpdate();
 			JOptionPane.showMessageDialog(null, "Se han guardado los datos correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
 			ps1.close();
@@ -91,7 +92,7 @@ public class InvolucraDao {
 	}
 
 
-	public void eliminarInvolucra (String codigo) throws SQLException {
+	public void eliminarInvolucra (int codigo) throws SQLException {
 		int res = JOptionPane.showOptionDialog(new JFrame(), "¿Estás seguro que deseas cancelar la reserva?", "Options",
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
 				new Object[] { "Sí, estoy seguro", "Volver atrás" }, JOptionPane.YES_OPTION);
@@ -99,9 +100,9 @@ public class InvolucraDao {
 		if (res == JOptionPane.YES_OPTION) {
 			Conexion conex = new Conexion();
 			try {
-				String consulta = "DELETE FROM involucra WHERE inMatricula= ?";
+				String consulta = "DELETE FROM involucra WHERE inReserva= ?";
 				PreparedStatement ps = conex.getConnection().prepareStatement(consulta);
-				ps.setString(1, codigo);
+				ps.setInt(1, codigo);
 				ps.executeUpdate();
 				ps.close();
 				conex.desconectar();

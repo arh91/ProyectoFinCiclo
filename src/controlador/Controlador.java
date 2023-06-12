@@ -162,7 +162,7 @@ public class Controlador {
 		involucraDao.insertarInvolucra(involucra, codigoReserva);
 	}
 
-	public void eliminarInvolucra(String codigo) throws SQLException {
+	public void eliminarInvolucra(int codigo) throws SQLException {
 		involucraDao.eliminarInvolucra(codigo);
 	}
 
