@@ -131,8 +131,13 @@ public class CocheDao {
 		Conexion conexion = new Conexion();
 
 		String consulta = "UPDATE coches SET coDisponible= 1"
-				+ " WHERE coMatricula = "+cadena+"";
+				+ " WHERE coMatricula = ?";
 		PreparedStatement ps = null;
+		try {
+			ps = conexion.getConnection().prepareStatement(consulta);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 		try {
 			ps.executeUpdate();
 		} catch (SQLException e) {
