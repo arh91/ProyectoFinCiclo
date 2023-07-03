@@ -12,7 +12,7 @@ public class Conexion {
 	static String login = "root";
 	static String password = "castelao";
 	static String url = "jdbc:mysql://localhost/"+bd+
-			"?noAccessToProcedureBodies=true&useServerPrepStmts=true&serverTimezone=Europe/Madrid&useSSL=false";
+			"?noAccessToProcedureBodies=true&useServerPrepStmts=true&serverTimezone=Europe/Madrid&useSSL=false&allowPublicKeyRetrieval=true";
 
 	Connection conn = null;
 
