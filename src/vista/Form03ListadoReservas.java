@@ -70,7 +70,7 @@ Form03ListadoReservas extends JFrame {
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Seleccionar Mes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(12, 13, 842, 44);
+		panel.setBounds(12, 13, 672, 44);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
@@ -81,7 +81,10 @@ Form03ListadoReservas extends JFrame {
 		}
 		panel.add(meses);
 
-		
+		JButton historialReservas = new JButton("Historial Reservas");
+		historialReservas.addActionListener(new HistorialReservasActionListener());
+		historialReservas.setBounds(704, 22, 150 ,30);
+		contentPanel.add(historialReservas);
 
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(12, 70, 842, 179);
@@ -185,6 +188,12 @@ Form03ListadoReservas extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			dispose();
 			controlador.mostrarF01Inicial();
+		}
+	}
+
+	private class HistorialReservasActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			controlador.mostrarF10HistorialReservas();
 		}
 	}
 	

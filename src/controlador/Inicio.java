@@ -1,11 +1,6 @@
 package controlador;
 
-import vista.Form01Inicial;
-import vista.Form02NuevaReserva;
-import vista.Form03ListadoReservas;
-import vista.Form04Cliente;
-import vista.Form05ListadoClientes;
-import vista.Form06MasOpcionesCliente;
+import vista.*;
 
 public class Inicio {
 
@@ -16,6 +11,7 @@ public class Inicio {
 		Form04Cliente cliente = new Form04Cliente();
 		Form05ListadoClientes listaClientes = new Form05ListadoClientes();
 		Form06MasOpcionesCliente opcionesCliente = new Form06MasOpcionesCliente();
+		Form10HistorialReservas historialReservas = new Form10HistorialReservas();
 		Controlador controlador = new Controlador();
 		
 		inicio.setControlador(controlador);
@@ -24,6 +20,7 @@ public class Inicio {
 		cliente.setControlador(controlador);
 		listaClientes.setControlador(controlador);
 		opcionesCliente.setControlador(controlador);
+		historialReservas.setControlador(controlador);
 		
 		controlador.setInicio(inicio);
 		controlador.setNuevaReserva(nuevaReserva);
@@ -31,6 +28,7 @@ public class Inicio {
 		controlador.setCliente(cliente);
 		controlador.setListadoClientes(listaClientes);
 		controlador.setMasOpcionesCliente(opcionesCliente);
+		controlador.setHistorialReservas(historialReservas);
 		
 		controlador.mostrarF01Inicial();
 	}

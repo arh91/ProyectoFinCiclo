@@ -15,12 +15,7 @@ import modeloVo.FilaReserva;
 import modeloVo.Involucra;
 import modeloVo.Reserva;
 
-import vista.Form01Inicial;
-import vista.Form02NuevaReserva;
-import vista.Form05ListadoClientes;
-import vista.Form06MasOpcionesCliente;
-import vista.Form04Cliente;
-import vista.Form03ListadoReservas;
+import vista.*;
 
 public class Controlador {
 	
@@ -30,7 +25,7 @@ public class Controlador {
 	Form04Cliente clientes;
 	Form05ListadoClientes listaClientes;
 	Form06MasOpcionesCliente masOpciones;
-	
+	Form10HistorialReservas historialReservas;
 	
 	ClienteDao clienteDao = new ClienteDao();
 	CocheDao cocheDao = new CocheDao();
@@ -61,6 +56,8 @@ public class Controlador {
 	public void setMasOpcionesCliente(Form06MasOpcionesCliente masOpciones) {
 		this.masOpciones = masOpciones;
 	}
+
+	public void setHistorialReservas(Form10HistorialReservas historialReservas) { this.historialReservas = historialReservas;}
 	
 	public void setClienteDao (ClienteDao clienteDao) {
 		this.clienteDao = clienteDao;
@@ -103,6 +100,10 @@ public class Controlador {
 	public void mostrarF06MasOpcionesCliente() {
 		masOpciones.setVisible(true);
 	}
+
+	public void mostrarF10HistorialReservas() { historialReservas.setVisible(true); }
+
+
 	
 	///////////////////////////////////////////////////////////////////////
 
