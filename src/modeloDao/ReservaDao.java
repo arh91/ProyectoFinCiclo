@@ -75,6 +75,15 @@ public class ReservaDao {
 			}
 		//}
 	}
+
+
+	public void eliminarReservasAntiguas() throws SQLException {
+		Conexion conex= new Conexion();
+		String consulta = "DELETE FROM Reservas WHERE reFecFinal < DATE_SUB(NOW(), INTERVAL 5 YEAR)";
+		PreparedStatement ps = null;
+		ps = conex.getConnection().prepareStatement(consulta);
+		ps.executeUpdate();
+	}
 	
 	
 	public ArrayList<FilaReserva> ReservasEnero() {

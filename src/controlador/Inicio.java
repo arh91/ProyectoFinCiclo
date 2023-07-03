@@ -2,9 +2,11 @@ package controlador;
 
 import vista.*;
 
+import java.sql.SQLException;
+
 public class Inicio {
 
-	private void iniciar() {
+	private void iniciar() throws SQLException {
 		Form01Inicial inicio = new Form01Inicial();
 		Form02NuevaReserva nuevaReserva = new Form02NuevaReserva();
 		Form03ListadoReservas listaReservas = new Form03ListadoReservas();
@@ -34,7 +36,7 @@ public class Inicio {
 	}
 	
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		Inicio principal = new Inicio();
 		principal.iniciar();
 	}

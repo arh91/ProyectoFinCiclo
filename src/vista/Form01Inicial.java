@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class Form01Inicial extends JFrame{
 
@@ -13,7 +14,7 @@ public class Form01Inicial extends JFrame{
 	
 	//private JDialog dialogg;
 	
-	Controlador controlador;
+	Controlador controlador = new Controlador();
 	
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
@@ -39,14 +40,14 @@ public class Form01Inicial extends JFrame{
 	/**
 	 * Create the application.
 	 */
-	public Form01Inicial() {
+	public Form01Inicial() throws SQLException {
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize() throws SQLException {
 		setTitle("Inicio");
 		setBounds(100, 100, 450, 300);
 		setExtendedState(JFrame.NORMAL);
@@ -77,6 +78,9 @@ public class Form01Inicial extends JFrame{
 		btnSalir.addActionListener(new BtnSalirActionListener());
 		btnSalir.setBounds(155, 201, 140, 25);
 		getContentPane().add(btnSalir);
+
+
+		controlador.eliminarReservasAntiguas();
 	}
 	
 	private class BtnNuevaReservaActionListener implements ActionListener {

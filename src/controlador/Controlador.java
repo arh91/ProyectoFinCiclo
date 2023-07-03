@@ -135,6 +135,8 @@ public class Controlador {
 		reservaDao.eliminarReserva(codigo);
 	}
 
+	public void eliminarReservasAntiguas() throws SQLException { reservaDao.eliminarReservasAntiguas();}
+
 	public boolean existeMatriculaCoche(String codigo){
 		return cocheDao.existeMatriculaCoche(codigo);
 	}
