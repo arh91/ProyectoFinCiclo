@@ -171,7 +171,8 @@ Form03ListadoReservas extends JFrame {
 				buttonPane.add(atrasButton);
 			}
 		}
-				
+
+		ReservasEnero();
 	}
 	
 	private class ComboMesActionListener implements ActionListener {
@@ -193,6 +194,7 @@ Form03ListadoReservas extends JFrame {
 
 	private class HistorialReservasActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			dispose();
 			controlador.mostrarF10HistorialReservas();
 		}
 	}

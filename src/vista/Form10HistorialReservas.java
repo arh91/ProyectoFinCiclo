@@ -118,7 +118,6 @@ public class Form10HistorialReservas extends JFrame {
             }
         }
 
-        ReservasNoviembre();
     }
 
 
@@ -128,7 +127,7 @@ public class Form10HistorialReservas extends JFrame {
         }
     }
     private class AtrasButtonActionListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent arg0) {
             dispose();
             controlador.mostrarF03ListadoReservas();
         }
