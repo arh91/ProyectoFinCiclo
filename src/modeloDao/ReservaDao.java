@@ -79,10 +79,21 @@ public class ReservaDao {
 
 	public void eliminarReservasAntiguas() throws SQLException {
 		Conexion conex= new Conexion();
-		String consulta = "DELETE FROM Reservas WHERE reFecFinal < DATE_SUB(NOW(), INTERVAL 5 YEAR)";
+
+		String consulta = "DELETE FROM Involucra WHERE inReserva IN(SELECT reCodigo FROM Reservas WHERE reFecFinal < DATE_SUB(NOW(), INTERVAL 5 YEAR))";
+		String consulta2 = "DELETE FROM Reservas WHERE reFecFinal < DATE_SUB(NOW(), INTERVAL 5 YEAR)";
+
 		PreparedStatement ps = null;
 		ps = conex.getConnection().prepareStatement(consulta);
+		PreparedStatement ps2 = null;
+		ps2 = conex.getConnection().prepareStatement(consulta2);
+
 		ps.executeUpdate();
+		ps2.executeUpdate();
+
+		ps.close();
+		ps2.close();
+		conex.desconectar();
 	}
 	
 	
