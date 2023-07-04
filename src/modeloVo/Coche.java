@@ -67,7 +67,7 @@ public class Coche {
 	}
 	@Override
 	public String toString() {
-		return matricula+"   "+marca+"   "+modelo+"   "+color+"   "+"precio = "+precio; 
+		return matricula+"   "+marca+"   "+modelo+"   "+color+"   "+"precio = "+precio+"  ";
 	}
 	
 	
