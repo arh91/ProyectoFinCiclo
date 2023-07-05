@@ -76,7 +76,6 @@ public class Form10HistorialReservas extends JFrame {
 
         JComboBox comboBoxMeses = new JComboBox();
         comboBoxMeses.setBounds(90, 97, 186, 21);
-        rellenarComboMeses(comboBoxMeses);
         contentPanel.add(comboBoxMeses);
         //comboBoxMeses.setSelectedItem("Noviembre");
 
