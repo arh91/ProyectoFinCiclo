@@ -11,13 +11,13 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.util.Arrays;
 
 public class
 Form03ListadoReservas extends JFrame {
 
 	private final JPanel contentPanel = new JPanel();
-
-
 	Controlador controlador;
 	private JScrollPane scrollPane;
 	
@@ -101,7 +101,7 @@ Form03ListadoReservas extends JFrame {
 		));
 		tabla_Reservas.getColumnModel().getColumn(0).setPreferredWidth(86);
 		scrollPane.setColumnHeaderView(tabla_Reservas);
-		
+
 		/*{
 			JPanel panel_1 = new JPanel();
 			panel_1.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Resumen Mes", TitledBorder.LEADING, TitledBorder.TOP, null, null));

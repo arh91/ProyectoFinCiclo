@@ -10,10 +10,17 @@ import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
 
 public class Form10HistorialReservas extends JFrame {
-
+    LocalDate todaysDate = LocalDate.now();  //Fecha actual del sistema
+    String fechaActual = todaysDate.toString();
+    String[] arrayFecha = fechaActual.split("-");
+    String anhoActual = arrayFecha[0];
+    int intAnhoActual = Integer.parseInt(anhoActual);
+    int primerAnho = intAnhoActual - 5;
     private final JPanel contentPanel = new JPanel();
     Controlador controlador;
 
@@ -23,8 +30,10 @@ public class Form10HistorialReservas extends JFrame {
      */
     private final JTextField textField = new JTextField();
     private String[] mesesAnho = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+    private String[] numerosMeses = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
+    //private String[] mesesAnteriores = {};
+    //private String[] mesesSiguientes = {};
     private ModeloTablaReservas miModelo;
-    private Integer[] Anhos = {2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023};
     private JScrollPane scrollPane;
     private JTable table_1;
 
@@ -67,19 +76,14 @@ public class Form10HistorialReservas extends JFrame {
 
         JComboBox comboBoxMeses = new JComboBox();
         comboBoxMeses.setBounds(90, 97, 186, 21);
-        for(int i=0; i<mesesAnho.length; i++) {
-            comboBoxMeses.addItem(mesesAnho[i]);
-        }
+        rellenarComboMeses(comboBoxMeses);
         contentPanel.add(comboBoxMeses);
-        comboBoxMeses.setSelectedItem("Noviembre");
+        //comboBoxMeses.setSelectedItem("Noviembre");
 
         JComboBox comboBoxAnhos = new JComboBox();
         comboBoxAnhos.setBounds(402, 97, 158, 21);
-        for(int i=0; i<Anhos.length; i++) {
-            comboBoxAnhos.addItem(Anhos[i]);
-        }
+        rellenarComboAnhos(comboBoxAnhos);
         contentPanel.add(comboBoxAnhos);
-        comboBoxAnhos.setSelectedItem(2022);
 
         JLabel lblNewLabel_1 = new JLabel("Mes");
         lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -152,6 +156,67 @@ public class Form10HistorialReservas extends JFrame {
         tcr.setHorizontalAlignment(SwingConstants.CENTER);
         for(int i=0; i<5; i++) {
             table.getColumnModel().getColumn(i).setCellRenderer(tcr);
+        }
+    }
+
+    private void definirMeses(){
+
+    }
+    private void rellenarComboMesesAnteriores(JComboBox comboMeses){
+        int indiceMes = 0;
+        String fechaActual = todaysDate.toString();
+        String[] arrayFecha = fechaActual.split("-");
+        String mesActual = arrayFecha[1];
+        System.out.println("MES ACTUAL "+mesActual);
+
+        for (int i=0; i<numerosMeses.length; i++){
+            if(numerosMeses[i] == mesActual){
+                indiceMes = i;
+            }
+        }
+
+        int tamanhoArray = indiceMes+1;
+        String[] mesesAnteriores = new String[tamanhoArray];
+
+        for (int i=0; i<mesesAnteriores.length; i++){
+            mesesAnteriores[i] = mesesAnho[0];
+        }
+    }
+
+
+    private void rellenarComboMesesSiguientes(JComboBox comboMeses){
+        int indiceMes = 0;
+        String fechaActual = todaysDate.toString();
+        String[] arrayFecha = fechaActual.split("-");
+        String mesActual = arrayFecha[1];
+        System.out.println("MES ACTUAL "+mesActual);
+
+        for (int i=0; i<numerosMeses.length; i++){
+            if(numerosMeses[i] == mesActual){
+                indiceMes = i;
+            }
+        }
+
+        int tamanhoArray = 12-indiceMes;
+        String[] mesesSiguientes = new String[tamanhoArray];
+
+        for (int i=0; i<mesesSiguientes.length; i++){
+            mesesSiguientes[i] = mesesAnho[indiceMes+i];
+        }
+    }
+
+    private void rellenarComboAnhos(JComboBox comboAnhos){
+        int[] anhos = new int[6];
+
+        for (int i=0; i<anhos.length; i++){
+            anhos[i] = intAnhoActual;
+            intAnhoActual --;
+        }
+
+        System.out.println(Arrays.toString(anhos));
+
+        for (int i=0; i<anhos.length; i++){
+            comboAnhos.addItem(anhos[i]);
         }
     }
 
