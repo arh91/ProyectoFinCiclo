@@ -178,7 +178,10 @@ public class Form10HistorialReservas extends JFrame {
         String[] mesesAnteriores = new String[tamanhoArray];
 
         for (int i=0; i<mesesAnteriores.length; i++){
-            mesesAnteriores[i] = mesesAnho[0];
+            mesesAnteriores[i] = mesesAnho[i];
+        }
+        for(int i=0; i<mesesAnteriores.length; i++){
+            comboMeses.addItem(mesesAnteriores[i]);
         }
     }
 
@@ -201,6 +204,9 @@ public class Form10HistorialReservas extends JFrame {
 
         for (int i=0; i<mesesSiguientes.length; i++){
             mesesSiguientes[i] = mesesAnho[indiceMes+i];
+        }
+        for(int i=0; i<mesesSiguientes.length; i++){
+            comboMeses.addItem(mesesSiguientes[i]);
         }
     }
 
