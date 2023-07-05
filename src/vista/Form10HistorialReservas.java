@@ -10,6 +10,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.time.LocalDate;
 import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
@@ -20,7 +22,8 @@ public class Form10HistorialReservas extends JFrame {
     String[] arrayFecha = fechaActual.split("-");
     String anhoActual = arrayFecha[0];
     int intAnhoActual = Integer.parseInt(anhoActual);
-    int primerAnho = intAnhoActual - 5;
+    int intPrimerAnho = intAnhoActual - 5;
+    String primerAnho = String.valueOf(intPrimerAnho);
     private final JPanel contentPanel = new JPanel();
     Controlador controlador;
 
@@ -36,6 +39,8 @@ public class Form10HistorialReservas extends JFrame {
     private ModeloTablaReservas miModelo;
     private JScrollPane scrollPane;
     private JTable table_1;
+    JComboBox comboBoxMeses;
+    JComboBox comboBoxAnhos;
 
 
 
@@ -74,14 +79,16 @@ public class Form10HistorialReservas extends JFrame {
         lblNewLabel.setBounds(230, 22, 238, 43);
         contentPanel.add(lblNewLabel);
 
-        JComboBox comboBoxMeses = new JComboBox();
+        comboBoxMeses = new JComboBox();
         comboBoxMeses.setBounds(90, 97, 186, 21);
+        rellenarComboMesesAnteriores(comboBoxMeses);
         contentPanel.add(comboBoxMeses);
         //comboBoxMeses.setSelectedItem("Noviembre");
 
-        JComboBox comboBoxAnhos = new JComboBox();
+        comboBoxAnhos = new JComboBox();
         comboBoxAnhos.setBounds(402, 97, 158, 21);
         rellenarComboAnhos(comboBoxAnhos);
+        comboBoxAnhos.setSelectedIndex(0);
         contentPanel.add(comboBoxAnhos);
 
         JLabel lblNewLabel_1 = new JLabel("Mes");
@@ -121,6 +128,18 @@ public class Form10HistorialReservas extends JFrame {
             }
         }
 
+        comboBoxAnhos.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent itemEvent) {
+                if (comboBoxAnhos.getSelectedItem().toString().equals(primerAnho)) {
+                    rellenarComboMesesSiguientes(comboBoxMeses);
+                } else if (comboBoxAnhos.getSelectedItem().toString().equals(anhoActual)) {
+                    rellenarComboMesesAnteriores(comboBoxMeses);
+                } else {
+                    rellenarTodosLosMeses(comboBoxMeses);
+                }
+            }
+        });
+
     }
 
 
@@ -132,6 +151,8 @@ public class Form10HistorialReservas extends JFrame {
     private class AtrasButtonActionListener implements ActionListener {
         public void actionPerformed(ActionEvent arg0) {
             dispose();
+            rellenarComboMesesAnteriores(comboBoxMeses);
+            comboBoxAnhos.setSelectedIndex(0);
             controlador.mostrarF03ListadoReservas();
         }
     }
@@ -158,10 +179,8 @@ public class Form10HistorialReservas extends JFrame {
         }
     }
 
-    private void definirMeses(){
-
-    }
     private void rellenarComboMesesAnteriores(JComboBox comboMeses){
+        comboMeses.removeAllItems();
         int indiceMes = 0;
         String fechaActual = todaysDate.toString();
         String[] arrayFecha = fechaActual.split("-");
@@ -169,9 +188,10 @@ public class Form10HistorialReservas extends JFrame {
         System.out.println("MES ACTUAL "+mesActual);
 
         for (int i=0; i<numerosMeses.length; i++){
-            if(numerosMeses[i] == mesActual){
-                indiceMes = i;
+            if(numerosMeses[i].equals(mesActual)){
+                break;
             }
+            indiceMes++;
         }
 
         int tamanhoArray = indiceMes+1;
@@ -187,6 +207,7 @@ public class Form10HistorialReservas extends JFrame {
 
 
     private void rellenarComboMesesSiguientes(JComboBox comboMeses){
+        comboMeses.removeAllItems();
         int indiceMes = 0;
         String fechaActual = todaysDate.toString();
         String[] arrayFecha = fechaActual.split("-");
@@ -194,9 +215,10 @@ public class Form10HistorialReservas extends JFrame {
         System.out.println("MES ACTUAL "+mesActual);
 
         for (int i=0; i<numerosMeses.length; i++){
-            if(numerosMeses[i] == mesActual){
-                indiceMes = i;
+            if(numerosMeses[i].equals(mesActual)){
+                break;
             }
+            indiceMes++;
         }
 
         int tamanhoArray = 12-indiceMes;
@@ -210,7 +232,15 @@ public class Form10HistorialReservas extends JFrame {
         }
     }
 
+    private void rellenarTodosLosMeses(JComboBox comboMeses){
+        comboMeses.removeAllItems();
+        for(int i=0; i<mesesAnho.length; i++){
+            comboMeses.addItem(mesesAnho[i]);
+        }
+    }
+
     private void rellenarComboAnhos(JComboBox comboAnhos){
+        comboAnhos.removeAllItems();
         int[] anhos = new int[6];
 
         for (int i=0; i<anhos.length; i++){
