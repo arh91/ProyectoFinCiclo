@@ -25,9 +25,10 @@ public class ModeloComboCoches extends JComboBox<Coche>{
 		
 		coches = controlador.cargarCoches();
 		for(Coche coche : coches) {
-			if(coche.isDisponible()==true){
+			/*if(coche.isDisponible()==true){
 				this.addItem(coche);
-			}
+			}*/
+			this.addItem(coche);
 		}
 		
 		

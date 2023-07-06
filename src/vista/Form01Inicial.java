@@ -79,7 +79,7 @@ public class Form01Inicial extends JFrame{
 		btnSalir.setBounds(155, 201, 140, 25);
 		getContentPane().add(btnSalir);
 
-
+		controlador.moverAHistorial();
 		controlador.eliminarReservasAntiguas();
 	}
 	

@@ -137,6 +137,8 @@ public class Controlador {
 
 	public void eliminarReservasAntiguas() throws SQLException { reservaDao.eliminarReservasAntiguas();}
 
+	public void moverAHistorial() throws SQLException { reservaDao.moverAHistorial();}
+
 	public boolean existeMatriculaCoche(String codigo){
 		return cocheDao.existeMatriculaCoche(codigo);
 	}
@@ -144,14 +146,17 @@ public class Controlador {
 	public void reservarCoche(Date fecInicio, Date fecFin, String cadena) {
 		cocheDao.reservarCoche(fecInicio, fecFin, cadena);
 	}
+	public void busquedaReservas(String matricula){
+		reservaDao.busquedaReservas(matricula);
+	}
 
 	public void liberarCoche(String cadena){
 		cocheDao.liberarCoche(cadena);
 	}
 	
-	public void preguntarDisponibilidadCoche(String codigo, Coche coche) {
+	/*public void preguntarDisponibilidadCoche(String codigo, Coche coche) {
 		cocheDao.preguntarDisponibilidadCoche(codigo, coche);
-	}
+	}*/
 
 	public boolean existeCliente(String codigo){
 		return involucraDao.existeCliente(codigo);

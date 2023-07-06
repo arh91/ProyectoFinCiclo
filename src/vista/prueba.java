@@ -496,7 +496,7 @@ public class prueba extends JFrame {
             Involucra involucra = new Involucra();
 
 
-            controlador.preguntarDisponibilidadCoche(matricula, coche);
+            //controlador.preguntarDisponibilidadCoche(matricula, coche);
 
             if(coche.isDisponible()==false) {
                 JOptionPane.showMessageDialog(null, "Lo sentimos, el coche seleccionado no se encuentra disponible para las fechas que usted ha seleccionado.");

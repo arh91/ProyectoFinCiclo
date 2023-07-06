@@ -77,11 +77,48 @@ public class ReservaDao {
 	}
 
 
+	public void moverAHistorial() throws SQLException {
+		Conexion conex= new Conexion();
+
+		String consulta = "INSERT INTO historialReservas "+
+		"SELECT * FROM Reservas "+
+		"WHERE reFecFinal < CURDATE()";
+
+		String consulta2 = "INSERT INTO historialInvolucra "+
+				"SELECT * FROM Involucra "+
+				"WHERE inReserva IN "+
+				"(SELECT reCodigo FROM Reservas "+
+				"WHERE reFecFinal < CURDATE())";
+		String consulta3 = "DELETE FROM Involucra WHERE inReserva IN(SELECT reCodigo FROM Reservas WHERE reFecFinal < CURDATE())";
+		String consulta4 = "DELETE FROM Reservas WHERE reFecFinal < CURDATE()";
+
+		PreparedStatement ps = null;
+		ps = conex.getConnection().prepareStatement(consulta);
+		PreparedStatement ps2 = null;
+		ps2 = conex.getConnection().prepareStatement(consulta2);
+		PreparedStatement ps3 = null;
+		ps3 = conex.getConnection().prepareStatement(consulta3);
+		PreparedStatement ps4 = null;
+		ps4 = conex.getConnection().prepareStatement(consulta4);
+
+		ps.executeUpdate();
+		ps2.executeUpdate();
+		ps3.executeUpdate();
+		ps4.executeUpdate();
+
+		ps.close();
+		ps2.close();
+		ps3.close();
+		ps4.close();
+		
+		conex.desconectar();
+	}
+
 	public void eliminarReservasAntiguas() throws SQLException {
 		Conexion conex= new Conexion();
 
-		String consulta = "DELETE FROM Involucra WHERE inReserva IN(SELECT reCodigo FROM Reservas WHERE reFecFinal < DATE_SUB(NOW(), INTERVAL 5 YEAR))";
-		String consulta2 = "DELETE FROM Reservas WHERE reFecFinal < DATE_SUB(NOW(), INTERVAL 5 YEAR)";
+		String consulta = "DELETE FROM historialInvolucra WHERE inReserva IN(SELECT reCodigo FROM historialReservas WHERE reFecFinal < DATE_SUB(NOW(), INTERVAL 5 YEAR))";
+		String consulta2 = "DELETE FROM historialReservas WHERE reFecFinal < DATE_SUB(NOW(), INTERVAL 5 YEAR)";
 
 		PreparedStatement ps = null;
 		ps = conex.getConnection().prepareStatement(consulta);
@@ -95,7 +132,35 @@ public class ReservaDao {
 		ps2.close();
 		conex.desconectar();
 	}
-	
+
+
+	public void busquedaReservas(String matricula) {
+		Conexion conexion = new Conexion();
+
+		String consulta = "select reFecInicio"
+				+" from Reservas join Involucra on reCodigo = inReserva"
+				+" where inMatricula = ?";
+
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			ps = conexion.getConnection().prepareStatement(consulta);
+			ps.setString(1, matricula);
+			//ps.setInt(1, departamento.getCodDepar());
+
+			rs = ps.executeQuery();
+
+			while(rs.next()) {
+				Date fecha = rs.getDate("reFecInicio");
+				String fechaString = ConvertirFechas.convertirDateString(fecha);
+				System.out.println("FECHAAA "+fechaString);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		conexion.desconectar();
+	}
 	
 	public ArrayList<FilaReserva> ReservasEnero() {
 		Conexion conexion = new Conexion();

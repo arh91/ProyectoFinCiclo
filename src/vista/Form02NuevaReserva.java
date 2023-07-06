@@ -34,7 +34,7 @@ public class Form02NuevaReserva extends JFrame {
 
 	LocalDate todaysDate = LocalDate.now();  //Fecha actual del sistema
 
-	Controlador controlador;
+	Controlador controlador = new Controlador();
 
 	private JTextField textFecInicial;
 	private JTextField textFecFinal;
@@ -227,7 +227,10 @@ public class Form02NuevaReserva extends JFrame {
 				buttonPane.add(btnAtras);
 			}
 		}
+
+		controlador.busquedaReservas("JBB-5623");
 	}
+
 	private class OkButtonActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			/*String cadena = String.valueOf(comboBox_Coches.getSelectedItem());
@@ -237,9 +240,9 @@ public class Form02NuevaReserva extends JFrame {
 			Reserva reserva = new Reserva();
 			Involucra involucra = new Involucra();
 
-			controlador.preguntarDisponibilidadCoche(matriculaCoche, coche);
+			//controlador.preguntarDisponibilidadCoche(matriculaCoche, coche);
 
-			if(coche.isDisponible()==true) {
+			if(coche.isDisponible()==false) {
 				JOptionPane.showMessageDialog(null, "Lo sentimos, el coche seleccionado no se encuentra disponible para las fechas que usted ha seleccionado.");
 			}else {
 				controlador.reservarCoche(fechaInicio, fechaFinal, matriculaCoche);

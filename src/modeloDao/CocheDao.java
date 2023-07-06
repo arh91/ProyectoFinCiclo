@@ -70,7 +70,7 @@ public class CocheDao {
 	}
 
 
-	public void preguntarDisponibilidadCoche(String codigo, Coche coche) {
+	/*public void preguntarDisponibilidadCoche(String codigo, Coche coche) {
 		String valor;
 		Conexion conex = new Conexion();
 		boolean existe = false;
@@ -89,7 +89,28 @@ public class CocheDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
-	}
+	}*/
+
+	/*public void preguntarDisponibilidadCoche(Date fecInicio, Date fecFin) {
+		String valor;
+		Conexion conex = new Conexion();
+		boolean existe = false;
+		try {
+			String consulta = "SELECT coDisponible FROM coches WHERE coMatricula = ?";
+			PreparedStatement ps = conex.getConnection().prepareStatement(consulta);
+			ps.setString(1, codigo);
+			ResultSet res = ps.executeQuery();
+			while(res.next()){
+				existe=true;
+				coche.setDisponible(res.getBoolean(6));
+			}
+			res.close();
+			conex.desconectar();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}*/
 	
 	
 	public void reservarCoche(Date fecInicio, Date fecFin, String cadena) {
