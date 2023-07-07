@@ -3,8 +3,10 @@ package modeloDao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.swing.*;
 
@@ -18,6 +20,9 @@ public class ReservaDao {
 		boolean existe = false;
 		Date fecInicio = new Date(reserva.getFecInicio().getTime());
 		Date fecFinal = new Date(reserva.getFecFinal().getTime());
+		java.sql.Date fecInicioSql = new java.sql.Date(fecInicio.getTime());
+		java.sql.Date fecFinalSql = new java.sql.Date(fecFinal.getTime());
+
 		Conexion conex= new Conexion();
 
 		String comprobarCodigosBD = "SELECT * FROM reservas WHERE reCodigo = ?";
@@ -39,8 +44,8 @@ public class ReservaDao {
 
 			PreparedStatement ps1 = conex.getConnection().prepareStatement(consulta);
 			ps1.setInt(1, codigo);
-			ps1.setDate(2, fecInicio);
-			ps1.setDate(3, fecFinal);
+			ps1.setDate(2, fecInicioSql);
+			ps1.setDate(3, fecFinalSql);
 			int filas = ps1.executeUpdate();
 			//JOptionPane.showMessageDialog(null, "Se han guardado los datos correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
 			ps1.close();
@@ -134,10 +139,11 @@ public class ReservaDao {
 	}
 
 
-	public void busquedaReservas(String matricula) {
+	public boolean comprobarDisponibilidadVehiculo(String matricula, java.sql.Date fechaInicioDate, java.sql.Date fechaFinDate) {
 		Conexion conexion = new Conexion();
+		int contador=0;
 
-		String consulta = "select reFecInicio"
+		String consulta = "select reFecInicio, reFecFinal"
 				+" from Reservas join Involucra on reCodigo = inReserva"
 				+" where inMatricula = ?";
 
@@ -147,19 +153,48 @@ public class ReservaDao {
 		try {
 			ps = conexion.getConnection().prepareStatement(consulta);
 			ps.setString(1, matricula);
-			//ps.setInt(1, departamento.getCodDepar());
+			/*ps.setDate(2, fechaInicioDate);
+			ps.setDate(3, fechaFinDate);*/
 
 			rs = ps.executeQuery();
 
 			while(rs.next()) {
-				Date fecha = rs.getDate("reFecInicio");
-				String fechaString = ConvertirFechas.convertirDateString(fecha);
-				System.out.println("FECHAAA "+fechaString);
+				Date fecha1Date = rs.getDate("reFecInicio");
+				Date fecha2Date = rs.getDate("reFecFinal");
+
+				LocalDate fechaInicio = fechaInicioDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+				LocalDate fechaFin = fechaFinDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+				LocalDate fecha1 = fecha1Date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+				LocalDate fecha2 = fecha2Date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+				if(fechaInicio.isAfter(fecha1)&&fechaInicio.isBefore(fecha2)){
+					contador++;
+				}
+				if(fechaFin.isAfter(fecha1)&&fechaFin.isBefore(fecha2)){
+					contador++;
+				}
+				if(fechaInicio.equals(fecha1)||fechaInicio.equals(fecha2)){
+					contador++;
+				}
+				if(fechaFin.equals(fecha1)||fechaFin.equals(fecha2)){
+					contador++;
+				}
 			}
+
+			/*if(contador==0){
+				return true;
+			}else{
+				return false;
+			}*/
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 		conexion.desconectar();
+		if(contador==0){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	public ArrayList<FilaReserva> ReservasEnero() {

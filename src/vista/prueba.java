@@ -501,7 +501,7 @@ public class prueba extends JFrame {
             if(coche.isDisponible()==false) {
                 JOptionPane.showMessageDialog(null, "Lo sentimos, el coche seleccionado no se encuentra disponible para las fechas que usted ha seleccionado.");
             }else {
-                controlador.reservarCoche(fechaInicio, fechaFinal, matricula);
+                //controlador.reservarCoche(fechaInicio, fechaFinal, matricula);
 				/*Reserva(reserva);
 				Involucra(involucra);*/
                 /*controlador.insertarReserva(reserva);

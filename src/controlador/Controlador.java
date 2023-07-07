@@ -2,7 +2,7 @@ package controlador;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 import modeloDao.ClienteDao;
 import modeloDao.CocheDao;
@@ -142,21 +142,10 @@ public class Controlador {
 	public boolean existeMatriculaCoche(String codigo){
 		return cocheDao.existeMatriculaCoche(codigo);
 	}
-
-	public void reservarCoche(Date fecInicio, Date fecFin, String cadena) {
-		cocheDao.reservarCoche(fecInicio, fecFin, cadena);
-	}
-	public void busquedaReservas(String matricula){
-		reservaDao.busquedaReservas(matricula);
-	}
-
-	public void liberarCoche(String cadena){
-		cocheDao.liberarCoche(cadena);
-	}
 	
-	/*public void preguntarDisponibilidadCoche(String codigo, Coche coche) {
-		cocheDao.preguntarDisponibilidadCoche(codigo, coche);
-	}*/
+	public boolean comprobarDisponibilidadVehiculo(String matricula, Date inicioReserva, Date finReserva) {
+		return reservaDao.comprobarDisponibilidadVehiculo(matricula, inicioReserva, finReserva);
+	}
 
 	public boolean existeCliente(String codigo){
 		return involucraDao.existeCliente(codigo);

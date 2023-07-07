@@ -227,8 +227,6 @@ public class Form02NuevaReserva extends JFrame {
 				buttonPane.add(btnAtras);
 			}
 		}
-
-		controlador.busquedaReservas("JBB-5623");
 	}
 
 	private class OkButtonActionListener implements ActionListener {
@@ -236,22 +234,24 @@ public class Form02NuevaReserva extends JFrame {
 			/*String cadena = String.valueOf(comboBox_Coches.getSelectedItem());
 			String[] arr = cadena.split("  ");
 			String matricula = arr[0];*/
-			Coche coche = new Coche();
 			Reserva reserva = new Reserva();
 			Involucra involucra = new Involucra();
+			Reserva(reserva);
+			Involucra(involucra);
 
-			//controlador.preguntarDisponibilidadCoche(matriculaCoche, coche);
+			java.sql.Date fechaInicioSql = new java.sql.Date(fechaInicio.getTime());
+			java.sql.Date fechaFinalSql = new java.sql.Date(fechaFinal.getTime());
 
-			if(coche.isDisponible()==false) {
+			if(controlador.comprobarDisponibilidadVehiculo(matriculaCoche, fechaInicioSql, fechaFinalSql)==false){
 				JOptionPane.showMessageDialog(null, "Lo sentimos, el coche seleccionado no se encuentra disponible para las fechas que usted ha seleccionado.");
 			}else {
-				controlador.reservarCoche(fechaInicio, fechaFinal, matriculaCoche);
-				Reserva(reserva);
+
+				/*Reserva(reserva);
 				Involucra(involucra);
 				System.out.println("MATRÍCULA: "+matriculaCoche);
 				System.out.println("DNI CLIENTE: "+nifInvolucra);
 				System.out.println("CÓDIGO RESERVA: "+codigoReserva);
-				System.out.println("LITROS: "+litros);
+				System.out.println("LITROS: "+litros);*/
 				codigoReserva = reserva.getCodigo();
 				controlador.insertarReserva(reserva, codigoReserva);
 				controlador.insertarInvolucra(involucra, codigoReserva);
@@ -273,7 +273,6 @@ public class Form02NuevaReserva extends JFrame {
 					throw new RuntimeException(e);
 				}
 				controlador.eliminarReserva(codigoReservaCancelar);
-				controlador.liberarCoche(matriculaCoche);
 			}
 			}
 		}
