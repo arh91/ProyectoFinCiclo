@@ -231,9 +231,6 @@ public class Form02NuevaReserva extends JFrame {
 
 	private class OkButtonActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			/*String cadena = String.valueOf(comboBox_Coches.getSelectedItem());
-			String[] arr = cadena.split("  ");
-			String matricula = arr[0];*/
 			Reserva reserva = new Reserva();
 			Involucra involucra = new Involucra();
 			Reserva(reserva);
@@ -245,13 +242,6 @@ public class Form02NuevaReserva extends JFrame {
 			if(controlador.comprobarDisponibilidadVehiculo(matriculaCoche, fechaInicioSql, fechaFinalSql)==false){
 				JOptionPane.showMessageDialog(null, "Lo sentimos, el coche seleccionado no se encuentra disponible para las fechas que usted ha seleccionado.");
 			}else {
-
-				/*Reserva(reserva);
-				Involucra(involucra);
-				System.out.println("MATRÍCULA: "+matriculaCoche);
-				System.out.println("DNI CLIENTE: "+nifInvolucra);
-				System.out.println("CÓDIGO RESERVA: "+codigoReserva);
-				System.out.println("LITROS: "+litros);*/
 				codigoReserva = reserva.getCodigo();
 				controlador.insertarReserva(reserva, codigoReserva);
 				controlador.insertarInvolucra(involucra, codigoReserva);

@@ -153,19 +153,19 @@ public class ReservaDao {
 		try {
 			ps = conexion.getConnection().prepareStatement(consulta);
 			ps.setString(1, matricula);
-			/*ps.setDate(2, fechaInicioDate);
-			ps.setDate(3, fechaFinDate);*/
 
 			rs = ps.executeQuery();
 
 			while(rs.next()) {
 				Date fecha1Date = rs.getDate("reFecInicio");
 				Date fecha2Date = rs.getDate("reFecFinal");
+				java.sql.Date fecha1SqlDate = new java.sql.Date(fecha1Date.getTime());
+				java.sql.Date fecha2SqlDate = new java.sql.Date(fecha2Date.getTime());
 
-				LocalDate fechaInicio = fechaInicioDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-				LocalDate fechaFin = fechaFinDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-				LocalDate fecha1 = fecha1Date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-				LocalDate fecha2 = fecha2Date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+				LocalDate fechaInicio = fechaInicioDate.toLocalDate();
+				LocalDate fechaFin = fechaFinDate.toLocalDate();
+				LocalDate fecha1 = fecha1SqlDate.toLocalDate();
+				LocalDate fecha2 = fecha2SqlDate.toLocalDate();
 
 				if(fechaInicio.isAfter(fecha1)&&fechaInicio.isBefore(fecha2)){
 					contador++;
@@ -180,12 +180,6 @@ public class ReservaDao {
 					contador++;
 				}
 			}
-
-			/*if(contador==0){
-				return true;
-			}else{
-				return false;
-			}*/
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -213,7 +207,6 @@ public class ReservaDao {
 		
 		try {
 			ps = conexion.getConnection().prepareStatement(consulta);
-			//ps.setInt(1, departamento.getCodDepar());
 			
 			rs = ps.executeQuery();
 			
