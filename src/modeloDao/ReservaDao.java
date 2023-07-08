@@ -18,6 +18,7 @@ public class ReservaDao {
 
 	public void insertarReserva (Reserva reserva, int codigo){
 		boolean existe = false;
+		LocalDate fechaActual = LocalDate.now();
 		Date fecInicio = new Date(reserva.getFecInicio().getTime());
 		Date fecFinal = new Date(reserva.getFecFinal().getTime());
 		java.sql.Date fecInicioSql = new java.sql.Date(fecInicio.getTime());

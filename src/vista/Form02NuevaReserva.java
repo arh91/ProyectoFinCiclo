@@ -231,6 +231,10 @@ public class Form02NuevaReserva extends JFrame {
 
 	private class OkButtonActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
+			if(textFecInicial.getText().isEmpty() || textFecFinal.getText().isEmpty() || textCodReserva.getText().isEmpty() || textLitros.getText().isEmpty()){
+				JOptionPane.showMessageDialog(null, "Por favor, rellene todos los campos del panel.","Información",JOptionPane.INFORMATION_MESSAGE);
+				return;
+			}
 			Reserva reserva = new Reserva();
 			Involucra involucra = new Involucra();
 			Reserva(reserva);
@@ -238,6 +242,17 @@ public class Form02NuevaReserva extends JFrame {
 
 			java.sql.Date fechaInicioSql = new java.sql.Date(fechaInicio.getTime());
 			java.sql.Date fechaFinalSql = new java.sql.Date(fechaFinal.getTime());
+			LocalDate inicioReserva = fechaInicioSql.toLocalDate();
+			LocalDate finReserva = fechaFinalSql.toLocalDate();
+
+			if(inicioReserva.isBefore(todaysDate)){
+				JOptionPane.showMessageDialog(null, "Error: La fecha de inicio de la reserva no puede ser anterior a la fecha de hoy.","Información",JOptionPane.INFORMATION_MESSAGE);
+				return;
+			}
+			if(inicioReserva.isAfter(finReserva)){
+				JOptionPane.showMessageDialog(null, "Error: La fecha de fin de la reserva no puede ser anterior a la fecha de inicio.","Información",JOptionPane.INFORMATION_MESSAGE);
+				return;
+			}
 
 			if(controlador.comprobarDisponibilidadVehiculo(matriculaCoche, fechaInicioSql, fechaFinalSql)==false){
 				JOptionPane.showMessageDialog(null, "Lo sentimos, el coche seleccionado no se encuentra disponible para las fechas que usted ha seleccionado.");
