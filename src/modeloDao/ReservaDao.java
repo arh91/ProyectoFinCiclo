@@ -79,9 +79,54 @@ public class ReservaDao {
 				System.out.println(e.getMessage());
 				JOptionPane.showMessageDialog(null, "Error, no se pudo cancelar la reserva");
 			}
-		//}
 	}
 
+	public void buscarReserva (Reserva reserva, int codigo) {
+		Conexion conex= new Conexion();
+		boolean existe=false;
+		try {
+			String consulta = "SELECT * FROM reservas where reCodigo = ? ";
+			PreparedStatement ps = conex.getConnection().prepareStatement(consulta);
+			ps.setInt(1, codigo);
+			ResultSet res = ps.executeQuery();
+			while(res.next()){
+				existe=true;
+				reserva.setCodigo(res.getInt("reCodigo"));
+				reserva.setFecInicio(res.getDate("reFecInicio"));
+				reserva.setFecFinal(res.getDate("reFecFinal"));
+			}
+			res.close();
+			conex.desconectar();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error, no se han podido obtener los datos");
+			System.out.println(e);
+		}
+		if (!existe) {
+			JOptionPane.showMessageDialog(null, "No existe ninguna reserva con éste código en nuestra base de datos.","Error",JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+
+	public void modificarReserva (Reserva reserva, int codigo) {
+		Conexion conex= new Conexion();
+		Date fecInicio = new Date(reserva.getFecInicio().getTime());
+		Date fecFinal = new Date(reserva.getFecFinal().getTime());
+		java.sql.Date fecInicioSql = new java.sql.Date(fecInicio.getTime());
+		java.sql.Date fecFinalSql = new java.sql.Date(fecFinal.getTime());
+
+		try{
+			String consulta="UPDATE reservas SET reCodigo = ? ,reFecInicio = ? , reFecFinal = ? WHERE reCodigo = ? ";
+			PreparedStatement ps = conex.getConnection().prepareStatement(consulta);
+			ps.setInt(1, reserva.getCodigo());
+			ps.setDate(2, fecInicioSql);
+			ps.setDate(3, fecFinalSql);
+			ps.executeUpdate();
+			JOptionPane.showMessageDialog(null, " Los datos de la reserva se han modificado correctamente ","Confirmación",JOptionPane.INFORMATION_MESSAGE);
+		}catch(SQLException e){
+			System.out.println(e);
+			JOptionPane.showMessageDialog(null, "Error al modificar los datos","Error",JOptionPane.ERROR_MESSAGE);
+		}
+	}
 
 	public void moverAHistorial() throws SQLException {
 		Conexion conex= new Conexion();

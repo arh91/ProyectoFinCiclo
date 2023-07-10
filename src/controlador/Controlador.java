@@ -140,6 +140,14 @@ public class Controlador {
 		reservaDao.eliminarReserva(codigo);
 	}
 
+	public void buscarReserva(Reserva reserva, int codigo){
+		reservaDao.buscarReserva(reserva, codigo);
+	}
+
+	public void modificarReserva(Reserva reserva, int codigo){
+		reservaDao.modificarReserva(reserva, codigo);
+	}
+
 	public void eliminarReservasAntiguas() throws SQLException { reservaDao.eliminarReservasAntiguas();}
 
 	public void moverAHistorial() throws SQLException { reservaDao.moverAHistorial();}
