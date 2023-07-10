@@ -226,6 +226,10 @@ public class Form02NuevaReserva extends JFrame {
 				btnAtras.setActionCommand("Cancel");
 				buttonPane.add(btnAtras);
 			}
+			JButton btnModificar = new JButton("Modificar");
+			btnModificar.addActionListener(new ModificarButtonActionListener());
+			btnModificar.setBounds(700, 22, 100, 25);
+			contentPanel.add(btnModificar);
 		}
 	}
 
@@ -289,6 +293,14 @@ public class Form02NuevaReserva extends JFrame {
 			controlador.mostrarF01Inicial();
 		}
 	}
+
+	private class ModificarButtonActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			dispose();
+			controlador.mostrarF11ModificarReservas();
+		}
+	}
+
 
 	private void modificarFechaInicio(){
 		fechaInicioModificada = textFecInicial.getText();

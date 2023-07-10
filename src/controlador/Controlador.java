@@ -26,6 +26,7 @@ public class Controlador {
 	Form05ListadoClientes listaClientes;
 	Form06MasOpcionesCliente masOpciones;
 	Form10HistorialReservas historialReservas;
+	Form11ModificarReserva modificarReserva;
 	
 	ClienteDao clienteDao = new ClienteDao();
 	CocheDao cocheDao = new CocheDao();
@@ -58,8 +59,10 @@ public class Controlador {
 	}
 
 	public void setHistorialReservas(Form10HistorialReservas historialReservas) { this.historialReservas = historialReservas;}
-	
-	public void setClienteDao (ClienteDao clienteDao) {
+
+	public void setModificarReserva(Form11ModificarReserva modificarReserva) { this.modificarReserva = modificarReserva;}
+
+	/*public void setClienteDao (ClienteDao clienteDao) {
 		this.clienteDao = clienteDao;
 	}
 	
@@ -73,7 +76,7 @@ public class Controlador {
 	
 	public void setInvolucraDao(InvolucraDao involucraDao) {
 		this.involucraDao = involucraDao;
-	}
+	}*/
 	
 	////////////////////////////////////////////////////////////////////////////////////
 	
@@ -102,6 +105,8 @@ public class Controlador {
 	}
 
 	public void mostrarF10HistorialReservas() { historialReservas.setVisible(true); }
+
+	public void mostrarF11ModificarReservas() {modificarReserva.setVisible(true); }
 
 
 	
@@ -228,6 +233,5 @@ public class Controlador {
 	public ArrayList<Coche> cargarCoches(){
 		return cocheDao.cargarCoches();
 	}
-	
-	
+
 }
