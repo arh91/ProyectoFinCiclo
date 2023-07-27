@@ -18,6 +18,7 @@ public class ReservaDao {
 
 	public void insertarReserva (Reserva reserva, int codigo){
 		boolean existe = false;
+		boolean existeHistorial = false;
 		LocalDate fechaActual = LocalDate.now();
 		Date fecInicio = new Date(reserva.getFecInicio().getTime());
 		Date fecFinal = new Date(reserva.getFecFinal().getTime());
@@ -27,6 +28,7 @@ public class ReservaDao {
 		Conexion conex= new Conexion();
 
 		String comprobarCodigosBD = "SELECT * FROM reservas WHERE reCodigo = ?";
+		String comprobarCodigosHistorial = "SELECT * FROM historialReservas WHERE reCodigo = ?";
 		String consulta = "INSERT INTO reservas VALUES (?, ?, ?)";
 		try {
 			PreparedStatement ps = conex.getConnection().prepareStatement(comprobarCodigosBD);
@@ -38,7 +40,16 @@ public class ReservaDao {
 				existe = false;
 			}
 
-			if(existe){
+			PreparedStatement ps2 = conex.getConnection().prepareStatement(comprobarCodigosHistorial);
+			ps2.setInt(1, codigo);
+			ResultSet rs2=ps2.executeQuery();
+			if(rs2.next()) {
+				existeHistorial = true;
+			} else {
+				existeHistorial = false;
+			}
+
+			if(existe || existeHistorial){
 				JOptionPane.showMessageDialog(null, "El código de reserva introducido ya existe en la base de datos.","Información",JOptionPane.INFORMATION_MESSAGE);
 				return;
 			}
@@ -48,12 +59,12 @@ public class ReservaDao {
 			ps1.setDate(2, fecInicioSql);
 			ps1.setDate(3, fecFinalSql);
 			int filas = ps1.executeUpdate();
-			//JOptionPane.showMessageDialog(null, "Se han guardado los datos correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Se han guardado los datos correctamente","Información",JOptionPane.INFORMATION_MESSAGE);
 			ps1.close();
 			conex.desconectar();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
-			//JOptionPane.showMessageDialog(null, "Error, no se han podido guardar los datos");
+			JOptionPane.showMessageDialog(null, "Error, no se han podido guardar los datos");
 		}
 	}
 
