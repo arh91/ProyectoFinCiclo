@@ -172,14 +172,9 @@ Form03ListadoReservas extends JFrame {
 			}
 		}
 
-		ReservasEnero();
+		ReservasMes(1);
 	}
-	
-	private class ComboMesActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-			
-		}
-	}
+
 	private class OkButtonActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			cargarTabla();
@@ -201,30 +196,10 @@ Form03ListadoReservas extends JFrame {
 	
 	
 	private void cargarTabla() {
-		if (meses.getSelectedItem() == "Enero") {
-			ReservasEnero();
-		}else if(meses.getSelectedItem() == "Febrero") {
-			ReservasFebrero();
-		}else if(meses.getSelectedItem() == "Marzo") {
-			ReservasMarzo();
-		}else if(meses.getSelectedItem() == "Abril") {
-			ReservasAbril();
-		}else if(meses.getSelectedItem() == "Mayo") {
-			ReservasMayo();
-		}else if(meses.getSelectedItem() == "Junio") {
-			ReservasJunio();
-		}else if(meses.getSelectedItem() == "Julio") {
-			ReservasJulio();
-		}else if(meses.getSelectedItem() == "Agosto") {
-			ReservasAgosto();
-		}else if(meses.getSelectedItem() == "Septiembre") {
-			ReservasSeptiembre();
-		}else if(meses.getSelectedItem() == "Octubre") {
-			ReservasOctubre();
-		}else if(meses.getSelectedItem() == "Noviembre") {
-			ReservasNoviembre();
-		}else {
-			ReservasDiciembre();
+		for(int i=0; i<mesesAnho.length; i++){
+			if(meses.getSelectedItem() == mesesAnho[i]){
+				ReservasMes(i+1);
+			}
 		}
 	}
 
@@ -236,99 +211,12 @@ Form03ListadoReservas extends JFrame {
 		}
 	}
 
-	private void ReservasEnero() {				
+	private void ReservasMes(int mes) {
 		miModelo = new ModeloTablaReservas();
 		tabla_Reservas = new JTable(miModelo);
 		centrarTextoTabla(tabla_Reservas);
-		miModelo.ListadoReservasEnero();	
+		miModelo.ListadoReservasMes(mes);
 		scrollPane.setViewportView(tabla_Reservas);
 	}
-	
-	private void ReservasFebrero() {				
-		miModelo = new ModeloTablaReservas();				
-		tabla_Reservas = new JTable(miModelo);
-		centrarTextoTabla(tabla_Reservas);
-		miModelo.ListadoReservasFebrero();	
-		scrollPane.setViewportView(tabla_Reservas);
-	}
-	
-	private void ReservasMarzo() {				
-		miModelo = new ModeloTablaReservas();				
-		tabla_Reservas = new JTable(miModelo);
-		centrarTextoTabla(tabla_Reservas);
-		miModelo.ListadoReservasMarzo();	
-		scrollPane.setViewportView(tabla_Reservas);
-	}
-	
-	private void ReservasAbril() {				
-		miModelo = new ModeloTablaReservas();				
-		tabla_Reservas = new JTable(miModelo);
-		centrarTextoTabla(tabla_Reservas);
-		miModelo.ListadoReservasAbril();	
-		scrollPane.setViewportView(tabla_Reservas);
-	}
-	
-	private void ReservasMayo() {				
-		miModelo = new ModeloTablaReservas();				
-		tabla_Reservas = new JTable(miModelo);
-		centrarTextoTabla(tabla_Reservas);
-		miModelo.ListadoReservasMayo();	
-		scrollPane.setViewportView(tabla_Reservas);
-	}
-	
-	private void ReservasJunio() {				
-		miModelo = new ModeloTablaReservas();				
-		tabla_Reservas = new JTable(miModelo);
-		centrarTextoTabla(tabla_Reservas);
-		miModelo.ListadoReservasJunio();	
-		scrollPane.setViewportView(tabla_Reservas);
-	}
-	
-	private void ReservasJulio() {				
-		miModelo = new ModeloTablaReservas();				
-		tabla_Reservas = new JTable(miModelo);
-		centrarTextoTabla(tabla_Reservas);
-		miModelo.ListadoReservasJulio();	
-		scrollPane.setViewportView(tabla_Reservas);
-	}
-	
-	private void ReservasAgosto() {				
-		miModelo = new ModeloTablaReservas();				
-		tabla_Reservas = new JTable(miModelo);
-		centrarTextoTabla(tabla_Reservas);
-		miModelo.ListadoReservasAgosto();	
-		scrollPane.setViewportView(tabla_Reservas);
-	}
-	
-	private void ReservasSeptiembre() {				
-		miModelo = new ModeloTablaReservas();				
-		tabla_Reservas = new JTable(miModelo);
-		centrarTextoTabla(tabla_Reservas);
-		miModelo.ListadoReservasSeptiembre();	
-		scrollPane.setViewportView(tabla_Reservas);
-	}
-	
-	private void ReservasOctubre() {				
-		miModelo = new ModeloTablaReservas();				
-		tabla_Reservas = new JTable(miModelo);
-		centrarTextoTabla(tabla_Reservas);
-		miModelo.ListadoReservasOctubre();	
-		scrollPane.setViewportView(tabla_Reservas);
-	}
-	
-	private void ReservasNoviembre() {				
-		miModelo = new ModeloTablaReservas();				
-		tabla_Reservas = new JTable(miModelo);
-		centrarTextoTabla(tabla_Reservas);
-		miModelo.ListadoReservasNoviembre();	
-		scrollPane.setViewportView(tabla_Reservas);
-	}
-	
-	private void ReservasDiciembre() {				
-		miModelo = new ModeloTablaReservas();				
-		tabla_Reservas = new JTable(miModelo);
-		centrarTextoTabla(tabla_Reservas);
-		miModelo.ListadoReservasDiciembre();	
-		scrollPane.setViewportView(tabla_Reservas);
-	}
+
 }

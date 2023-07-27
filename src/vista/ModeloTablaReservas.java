@@ -55,52 +55,9 @@ public class ModeloTablaReservas extends AbstractTableModel{
 		}
 		return reserva;
 	}
-	
-	public void ListadoReservasEnero() {
-		filaReserva = controlador.ReservasEnero();		
+
+	public void ListadoReservasMes(int mes) {
+		filaReserva = controlador.ReservasMes(mes);
 	}
-	
-	public void ListadoReservasFebrero() {
-		filaReserva = controlador.ReservasFebrero();		
-	}
-	
-	public void ListadoReservasMarzo() {
-		filaReserva = controlador.ReservasMarzo();		
-	}
-	
-	public void ListadoReservasAbril() {
-		filaReserva = controlador.ReservasAbril();		
-	}
-	
-	public void ListadoReservasMayo() {
-		filaReserva = controlador.ReservasMayo();		
-	}
-	
-	public void ListadoReservasJunio() {
-		filaReserva = controlador.ReservasJunio();		
-	}
-	
-	public void ListadoReservasJulio() {
-		filaReserva = controlador.ReservasJulio();		
-	}
-	
-	public void ListadoReservasAgosto() {
-		filaReserva = controlador.ReservasAgosto();		
-	}
-	
-	public void ListadoReservasSeptiembre() {
-		filaReserva = controlador.ReservasSeptiembre();		
-	}
-	
-	public void ListadoReservasOctubre() {
-		filaReserva = controlador.ReservasOctubre();		
-	}
-	
-	public void ListadoReservasNoviembre() {
-		filaReserva = controlador.ReservasNoviembre();		
-	}
-	
-	public void ListadoReservasDiciembre() {
-		filaReserva = controlador.ReservasDiciembre();		
-	}
+
 }

@@ -163,13 +163,13 @@ public class Form10HistorialReservas extends JFrame {
         }
     }
 
-    private void ReservasNoviembre() {
+    /*private void ReservasNoviembre() {
         miModelo = new ModeloTablaReservas();
         table_1 = new JTable(miModelo);
         centrarTextoTabla(table_1);
         miModelo.ListadoReservasNoviembre();
         scrollPane.setViewportView(table_1);
-    }
+    }*/
 
     private void centrarTextoTabla(JTable table){
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();

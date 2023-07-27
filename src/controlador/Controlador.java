@@ -185,55 +185,11 @@ public class Controlador {
 	public ArrayList<FilaCliente> cargarClientesPorLocalidad(String localidad){
 		return clienteDao.cargarClientesPorLocalidad(localidad);
 	}
-	
-	public ArrayList<FilaReserva> ReservasEnero() {
-		return reservaDao.ReservasEnero();		
+
+	public ArrayList<FilaReserva> ReservasMes(int mes) {
+		return reservaDao.ReservasMes(mes);
 	}
-	
-	public ArrayList<FilaReserva> ReservasFebrero() {
-		return reservaDao.ReservasFebrero();		
-	}
-	
-	public ArrayList<FilaReserva> ReservasMarzo() {
-		return reservaDao.ReservasMarzo();		
-	}
-	
-	public ArrayList<FilaReserva> ReservasAbril() {
-		return reservaDao.ReservasAbril();		
-	}
-	
-	public ArrayList<FilaReserva> ReservasMayo() {
-		return reservaDao.ReservasMayo();		
-	}
-	
-	public ArrayList<FilaReserva> ReservasJunio() {
-		return reservaDao.ReservasJunio();		
-	}
-	
-	public ArrayList<FilaReserva> ReservasJulio() {
-		return reservaDao.ReservasJulio();		
-	}
-	
-	public ArrayList<FilaReserva> ReservasAgosto() {
-		return reservaDao.ReservasAgosto();		
-	}
-	
-	public ArrayList<FilaReserva> ReservasSeptiembre() {
-		return reservaDao.ReservasSeptiembre();		
-	}
-	
-	public ArrayList<FilaReserva> ReservasOctubre() {
-		return reservaDao.ReservasOctubre();		
-	}
-	
-	public ArrayList<FilaReserva> ReservasNoviembre() {
-		return reservaDao.ReservasNoviembre();		
-	}
-	
-	public ArrayList<FilaReserva> ReservasDiciembre() {
-		return reservaDao.ReservasDiciembre();		
-	}
-	
+
 	public ArrayList<Cliente> cargarClientes(){
 		return clienteDao.cargarClientes();
 	}
