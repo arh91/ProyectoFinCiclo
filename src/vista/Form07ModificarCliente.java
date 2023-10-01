@@ -54,7 +54,7 @@ public class Form07ModificarCliente extends JFrame{
      * Initialize the contents of the frame.
      */
     private void initialize() {
-        setTitle("Opciones Clientes");
+        setTitle("Modificar Cliente");
         setBounds(100, 100, 455, 403);
         setExtendedState(JFrame.NORMAL);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -110,6 +110,7 @@ public class Form07ModificarCliente extends JFrame{
         getContentPane().add(textField_telefono);
 
         textField_nif = new JTextField();
+        textField_nif.setEditable(false);
         textField_nif.setColumns(10);
         textField_nif.setBounds(129, 42, 96, 19);
         getContentPane().add(textField_nif);
@@ -138,13 +139,15 @@ public class Form07ModificarCliente extends JFrame{
 
     private class BtnModificarActionListener implements ActionListener {
         public void actionPerformed(ActionEvent arg0) {
+
         }
     }
 
 
     private class BtnAtrasActionListener implements ActionListener {
         public void actionPerformed(ActionEvent arg0) {
-
+            dispose();
+            controlador.mostrarF06MasOpcionesCliente();
         }
     }
 }

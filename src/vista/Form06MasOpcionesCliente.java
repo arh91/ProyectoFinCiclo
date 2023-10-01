@@ -201,19 +201,21 @@ public class Form06MasOpcionesCliente extends JFrame{
 	
 	private class BtnModificarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			if(buscarPulsado == true) {
+			dispose();
+			controlador.mostrarF07ModificarCliente();
+			/*if(buscarPulsado == true) {
 				activarEdicionTextField();
 				buscarPulsado = false;
 				modificarPulsado = true;
 			}else {
 				JOptionPane.showMessageDialog(null, "Primero haga click en botón buscar, consulte los datos del cliente, y posteriormente si así lo desea podrá modificar dichos datos.");
-			}
+			}*/
 		}
 	}
 	
 	private class BtnOkActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			if(modificarPulsado==true) {
+			/*if(modificarPulsado==true) {
 				int res = JOptionPane.showOptionDialog(new JFrame(), "¿Estás seguro que quieres modificar los datos de"
 						+ " éste cliente?", "Options",
 						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
@@ -226,7 +228,7 @@ public class Form06MasOpcionesCliente extends JFrame{
 					limpiarCampos();
 					activarEdicionCodigo();
 				}
-			}
+			}*/
 			
 		}
 	}

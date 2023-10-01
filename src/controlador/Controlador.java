@@ -25,6 +25,7 @@ public class Controlador {
 	Form04Cliente clientes;
 	Form05ListadoClientes listaClientes;
 	Form06MasOpcionesCliente masOpciones;
+	Form07ModificarCliente modificarCliente;
 	Form10HistorialReservas historialReservas;
 	Form11ModificarReserva modificarReserva;
 	
@@ -56,6 +57,10 @@ public class Controlador {
 	
 	public void setMasOpcionesCliente(Form06MasOpcionesCliente masOpciones) {
 		this.masOpciones = masOpciones;
+	}
+
+	public void setModificarCliente(Form07ModificarCliente modificarCliente){
+		this.modificarCliente = modificarCliente;
 	}
 
 	public void setHistorialReservas(Form10HistorialReservas historialReservas) { this.historialReservas = historialReservas;}
@@ -102,6 +107,10 @@ public class Controlador {
 	
 	public void mostrarF06MasOpcionesCliente() {
 		masOpciones.setVisible(true);
+	}
+
+	public void mostrarF07ModificarCliente(){
+		modificarCliente.setVisible(true);
 	}
 
 	public void mostrarF10HistorialReservas() { historialReservas.setVisible(true); }

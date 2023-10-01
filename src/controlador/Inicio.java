@@ -13,6 +13,7 @@ public class Inicio {
 		Form04Cliente cliente = new Form04Cliente();
 		Form05ListadoClientes listaClientes = new Form05ListadoClientes();
 		Form06MasOpcionesCliente opcionesCliente = new Form06MasOpcionesCliente();
+		Form07ModificarCliente modificarCliente = new Form07ModificarCliente();
 		Form10HistorialReservas historialReservas = new Form10HistorialReservas();
 		Form11ModificarReserva modificarReserva = new Form11ModificarReserva();
 		Controlador controlador = new Controlador();
@@ -23,6 +24,7 @@ public class Inicio {
 		cliente.setControlador(controlador);
 		listaClientes.setControlador(controlador);
 		opcionesCliente.setControlador(controlador);
+		modificarCliente.setControlador(controlador);
 		historialReservas.setControlador(controlador);
 		modificarReserva.setControlador(controlador);
 		
@@ -32,6 +34,7 @@ public class Inicio {
 		controlador.setCliente(cliente);
 		controlador.setListadoClientes(listaClientes);
 		controlador.setMasOpcionesCliente(opcionesCliente);
+		controlador.setModificarCliente(modificarCliente);
 		controlador.setHistorialReservas(historialReservas);
 		controlador.setModificarReserva(modificarReserva);
 
