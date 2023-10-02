@@ -12,6 +12,7 @@ public class Form07ModificarCliente extends JFrame{
 
     Controlador controlador;
 
+    private static String dniCliente, nombreCliente, primerApellido, calle, numero, localidad, telefono;
 
     private JTextField textField_primer_apellido;
     private JTextField textField_nombre;
@@ -21,6 +22,8 @@ public class Form07ModificarCliente extends JFrame{
     private JTextField textField_telefono;
     private JTextField textField_nif;
     private JTextField textField_localidad;
+
+    Form06MasOpcionesCliente masOpciones = new Form06MasOpcionesCliente();
 
 
     public void setControlador(Controlador controlador) {
@@ -34,7 +37,7 @@ public class Form07ModificarCliente extends JFrame{
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    Form07ModificarCliente frame = new Form07ModificarCliente();
+                    Form07ModificarCliente frame = new Form07ModificarCliente(dniCliente, nombreCliente, primerApellido, calle, numero, localidad, telefono);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -46,9 +49,21 @@ public class Form07ModificarCliente extends JFrame{
     /**
      * Create the application.
      */
-    public Form07ModificarCliente() {
+    /*public Form07ModificarCliente() {
+        initialize();
+    }*/
+    public Form07ModificarCliente(String dniCliente, String nombreCliente, String primerApellido, String calle, String numero, String localidad, String telefono) throws HeadlessException {
+        this.dniCliente = dniCliente;
+        this.nombreCliente = nombreCliente;
+        this.primerApellido = primerApellido;
+        this.calle = calle;
+        this.numero = numero;
+        this.localidad = localidad;
+        this.telefono = telefono;
         initialize();
     }
+
+
 
     /**
      * Initialize the contents of the frame.
@@ -62,6 +77,7 @@ public class Form07ModificarCliente extends JFrame{
 
         textField_primer_apellido = new JTextField();
         textField_primer_apellido.setBounds(129, 110, 96, 19);
+        textField_primer_apellido.setText(primerApellido);
         getContentPane().add(textField_primer_apellido);
         textField_primer_apellido.setColumns(10);
 
@@ -90,6 +106,7 @@ public class Form07ModificarCliente extends JFrame{
         getContentPane().add(label_telefono);
 
         textField_nombre = new JTextField();
+        textField_nombre.setText(nombreCliente);
         textField_nombre.setColumns(10);
         textField_nombre.setBounds(129, 76, 96, 19);
         getContentPane().add(textField_nombre);
@@ -97,19 +114,23 @@ public class Form07ModificarCliente extends JFrame{
         textField_calle = new JTextField();
         textField_calle.setColumns(10);
         textField_calle.setBounds(129, 144, 96, 19);
+        textField_calle.setText(calle);
         getContentPane().add(textField_calle);
 
         textField_numero = new JTextField();
         textField_numero.setColumns(10);
         textField_numero.setBounds(129, 178, 96, 19);
+        textField_numero.setText(numero);
         getContentPane().add(textField_numero);
 
         textField_telefono = new JTextField();
         textField_telefono.setColumns(10);
         textField_telefono.setBounds(129, 252, 96, 19);
+        textField_telefono.setText(telefono);
         getContentPane().add(textField_telefono);
 
         textField_nif = new JTextField();
+        textField_nif.setText(dniCliente);
         textField_nif.setEditable(false);
         textField_nif.setColumns(10);
         textField_nif.setBounds(129, 42, 96, 19);
@@ -123,6 +144,7 @@ public class Form07ModificarCliente extends JFrame{
         textField_localidad = new JTextField();
         textField_localidad.setColumns(10);
         textField_localidad.setBounds(129, 215, 96, 19);
+        textField_localidad.setText(localidad);
         getContentPane().add(textField_localidad);
 
         JButton btnAtras = new JButton("Atrás");
@@ -147,7 +169,23 @@ public class Form07ModificarCliente extends JFrame{
     private class BtnAtrasActionListener implements ActionListener {
         public void actionPerformed(ActionEvent arg0) {
             dispose();
-            controlador.mostrarF06MasOpcionesCliente();
+            masOpciones = new Form06MasOpcionesCliente();
+            masOpciones.setVisible(true);
         }
+    }
+
+
+    public void recibirDatos() {
+        System.out.println("HEY JUDE!");
+        //masOpciones = new Form06MasOpcionesCliente();
+        //masOpciones.capturarDatos();
+        String nif = masOpciones.getDniCliente();
+        String nombre = masOpciones.getNombreCliente();
+        String primerApellido = masOpciones.getPrimerApellidoCliente();
+        System.out.println(nombre);
+
+        textField_nif.setText(nif);
+        textField_nombre.setText(nombre);
+        textField_primer_apellido.setText(primerApellido);
     }
 }

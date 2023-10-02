@@ -12,7 +12,7 @@ public class Form04Cliente extends JFrame{
 	
 	private final JPanel contentPane = new JPanel();
 	
-	Controlador controlador;
+	Controlador controlador = new Controlador();
 
 	private JTextField textField_primer_apellido;
 	private JTextField textField_nombre;

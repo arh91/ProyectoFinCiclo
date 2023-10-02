@@ -18,7 +18,7 @@ public class
 Form03ListadoReservas extends JFrame {
 
 	private final JPanel contentPanel = new JPanel();
-	Controlador controlador;
+	Controlador controlador = new Controlador();
 	private JScrollPane scrollPane;
 	
 	

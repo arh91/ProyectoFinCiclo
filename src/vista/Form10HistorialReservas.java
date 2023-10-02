@@ -25,7 +25,7 @@ public class Form10HistorialReservas extends JFrame {
     int intPrimerAnho = intAnhoActual - 5;
     String primerAnho = String.valueOf(intPrimerAnho);
     private final JPanel contentPanel = new JPanel();
-    Controlador controlador;
+    Controlador controlador = new Controlador();
 
     private DefaultTableCellRenderer alinearCentro, alinearDerecha, alinearIzquierda;
     /**

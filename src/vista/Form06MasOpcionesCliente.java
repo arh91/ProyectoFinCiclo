@@ -12,7 +12,7 @@ public class Form06MasOpcionesCliente extends JFrame{
 
 	private final JPanel contentPane = new JPanel();
 	
-	Controlador controlador;
+	Controlador controlador = new Controlador();
 	
 	
 	private JTextField textField_primer_apellido;
@@ -36,7 +36,9 @@ public class Form06MasOpcionesCliente extends JFrame{
 	private String calleCliente;
 	private String numeroCliente;
 	private String localidadCliente;
-	
+	private String telefono;
+
+	Form07ModificarCliente modificarCliente;
 
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
@@ -201,8 +203,20 @@ public class Form06MasOpcionesCliente extends JFrame{
 	
 	private class BtnModificarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
+			capturarDatos();
+			String dniCliente = getDniCliente();
+			String nombreCliente = getNombreCliente();
+			String primerApellido = getPrimerApellidoCliente();
+			String calle = getCalleCliente();
+			String numero = getNumeroCliente();
+			String localidad = getLocalidadCliente();
+			String telefono = getTelefono();
+
+			modificarCliente = new Form07ModificarCliente(dniCliente, nombreCliente, primerApellido, calle, numero, localidad, telefono);
 			dispose();
-			controlador.mostrarF07ModificarCliente();
+			modificarCliente.setVisible(true);
+
+
 			/*if(buscarPulsado == true) {
 				activarEdicionTextField();
 				buscarPulsado = false;
@@ -241,8 +255,7 @@ public class Form06MasOpcionesCliente extends JFrame{
 			controlador.mostrarF04Clientes();
 		}
 	}
-	
-	
+
 	public void activarEdicionTextField() {
 		textField_nif.setEditable(true);
 		textField_nombre.setEditable(true);
@@ -272,19 +285,60 @@ public class Form06MasOpcionesCliente extends JFrame{
 	}
 	
 	public void capturarDatos() {
+		System.out.println("MÉTODO CAPTURAR DATOS");
 		dniCliente = textField_nif.getText();
 		nombreCliente = textField_nombre.getText();
 		primerApellidoCliente = textField_primer_apellido.getText();
 		calleCliente = textField_calle.getText();
 		numeroCliente = textField_numero.getText();
 		localidadCliente = textField_localidad.getText();
-		telefonoCliente = Integer.parseInt(textField_telefono.getText());
+		//telefonoCliente = Integer.parseInt(textField_telefono.getText());
+		telefono = textField_telefono.getText();
 		
 		nombreCompletoCliente = nombreCliente+" "+primerApellidoCliente;
 		direccionCliente = calleCliente+","+numeroCliente+","+localidadCliente;
 	}
-	
-	
+
+	public String getDniCliente() {
+		return dniCliente;
+	}
+
+	public String getNombreCompletoCliente() {
+		return nombreCompletoCliente;
+	}
+
+	public String getNombreCliente() {
+		return nombreCliente;
+	}
+
+	public String getPrimerApellidoCliente() {
+		return primerApellidoCliente;
+	}
+
+	public String getDireccionCliente() {
+		return direccionCliente;
+	}
+
+	public int getTelefonoCliente() {
+		return telefonoCliente;
+	}
+
+	public String getCalleCliente() {
+		return calleCliente;
+	}
+
+	public String getNumeroCliente() {
+		return numeroCliente;
+	}
+
+	public String getLocalidadCliente() {
+		return localidadCliente;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
 	public void buscarCliente() {
 		if(textField_nif.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "El campo NIF está vacío. Por favor, introduzca un dni.");
@@ -311,7 +365,7 @@ public class Form06MasOpcionesCliente extends JFrame{
 				primerApellidoCliente = nombre[2];
 				
 			}
-			nombreCliente = nombre[0];
+			//nombreCliente = nombre[0];
 			String[] direccion = direccionCliente.split(",");
 			
 			calleCliente = direccion[0];

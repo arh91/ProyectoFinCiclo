@@ -59,9 +59,9 @@ public class Controlador {
 		this.masOpciones = masOpciones;
 	}
 
-	public void setModificarCliente(Form07ModificarCliente modificarCliente){
+	/*public void setModificarCliente(Form07ModificarCliente modificarCliente){
 		this.modificarCliente = modificarCliente;
-	}
+	}*/
 
 	public void setHistorialReservas(Form10HistorialReservas historialReservas) { this.historialReservas = historialReservas;}
 
@@ -109,9 +109,9 @@ public class Controlador {
 		masOpciones.setVisible(true);
 	}
 
-	public void mostrarF07ModificarCliente(){
+	/*public void mostrarF07ModificarCliente(){
 		modificarCliente.setVisible(true);
-	}
+	}*/
 
 	public void mostrarF10HistorialReservas() { historialReservas.setVisible(true); }
 

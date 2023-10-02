@@ -17,7 +17,7 @@ public class Form11ModificarReserva extends JFrame {
     LocalDate todaysDate = LocalDate.now();  //Fecha actual del sistema
     String today = String.valueOf(todaysDate);
 
-    Controlador controlador;
+    Controlador controlador = new Controlador();
 
     private JTextField textFecInicio;
     private JTextField textFecFinal;
