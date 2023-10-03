@@ -14,6 +14,8 @@ public class Form07ModificarCliente extends JFrame{
 
     private static String dniCliente, nombreCliente, primerApellido, calle, numero, localidad, telefono;
 
+    private String nombreClienteIntro, primerApellidoIntro, calleIntro, numeroIntro, localidadIntro, telefonoIntro;
+
     private JTextField textField_primer_apellido;
     private JTextField textField_nombre;
     private JTextField textField_segundo_apellido;
@@ -161,7 +163,17 @@ public class Form07ModificarCliente extends JFrame{
 
     private class BtnModificarActionListener implements ActionListener {
         public void actionPerformed(ActionEvent arg0) {
-
+            capturarDatos();
+            System.out.println(nombreClienteIntro);
+            System.out.println(nombreCliente);
+            if(nombreClienteIntro.equals(nombreCliente) && primerApellidoIntro.equals(primerApellido) && calleIntro.equals(calle) && numeroIntro.equals(numero) && localidadIntro.equals(localidad) && telefonoIntro.equals(telefono)){
+                JOptionPane.showMessageDialog(null, "No se ha modificado ningún dato","Error",JOptionPane.ERROR_MESSAGE);
+            }else if(nombreClienteIntro.isEmpty() || primerApellidoIntro.isEmpty() || calleIntro.isEmpty() || numeroIntro.isEmpty() || localidadIntro.isEmpty() || telefonoIntro.isEmpty()){
+                JOptionPane.showMessageDialog(null, "Error: no se han rellenado todos los campos","Error",JOptionPane.ERROR_MESSAGE);
+            }else{
+                //controlador.modificarCliente(cliente, codigo);
+                System.out.println("Probando...");
+            }
         }
     }
 
@@ -175,17 +187,12 @@ public class Form07ModificarCliente extends JFrame{
     }
 
 
-    public void recibirDatos() {
-        System.out.println("HEY JUDE!");
-        //masOpciones = new Form06MasOpcionesCliente();
-        //masOpciones.capturarDatos();
-        String nif = masOpciones.getDniCliente();
-        String nombre = masOpciones.getNombreCliente();
-        String primerApellido = masOpciones.getPrimerApellidoCliente();
-        System.out.println(nombre);
-
-        textField_nif.setText(nif);
-        textField_nombre.setText(nombre);
-        textField_primer_apellido.setText(primerApellido);
+    public void capturarDatos(){
+        nombreClienteIntro = textField_nombre.getText();
+        primerApellidoIntro = textField_primer_apellido.getText();
+        calleIntro = textField_calle.getText();
+        numeroIntro = textField_numero.getText();
+        localidadIntro = textField_localidad.getText();
+        telefonoIntro = textField_telefono.getText();
     }
 }
