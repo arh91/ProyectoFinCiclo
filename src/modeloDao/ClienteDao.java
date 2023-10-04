@@ -139,22 +139,28 @@ public class ClienteDao {
 			JOptionPane.showMessageDialog(null, "No existe ningún cliente con éste código en nuestra base de datos.","Error",JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
-	
+
+
 	public void modificarCliente (Cliente cliente, String codigo) {
-		Conexion conex= new Conexion();
-		try{
-			String consulta="UPDATE clientes SET clNif = ? ,clNombre = ? , clDireccion = ?, clTelefono = ? WHERE clNif = ? ";
-			PreparedStatement ps = conex.getConnection().prepareStatement(consulta);
-			ps.setString(1, cliente.getNif());
-			ps.setString(2, cliente.getNombre());
-			ps.setString(3, cliente.getDireccion());
-			ps.setInt(4, cliente.getTelefono());
-			ps.executeUpdate();
-			JOptionPane.showMessageDialog(null, " Los datos del cliente se han modificado correctamente ","Confirmación",JOptionPane.INFORMATION_MESSAGE);
-		}catch(SQLException e){
-			System.out.println(e);
-			JOptionPane.showMessageDialog(null, "Error al modificar los datos","Error",JOptionPane.ERROR_MESSAGE);
+		int res = JOptionPane.showOptionDialog(new JFrame(), "¿Estás seguro que quieres modificar éste cliente?", "Options",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+				new Object[] { "Continuar", "Cancelar" }, JOptionPane.YES_OPTION);
+		if (res == JOptionPane.YES_OPTION) {
+			Conexion conex = new Conexion();
+			try {
+				String consulta = "UPDATE clientes SET clNombre = ? , clDireccion = ?, clTelefono = ? WHERE clNif = ?";
+				PreparedStatement ps = conex.getConnection().prepareStatement(consulta);
+				//ps.setString(1, cliente.getNif());
+				ps.setString(1, cliente.getNombre());
+				ps.setString(2, cliente.getDireccion());
+				ps.setInt(3, cliente.getTelefono());
+				ps.setString(4, codigo);
+				ps.executeUpdate();
+				JOptionPane.showMessageDialog(null, " Los datos del cliente se han modificado correctamente ", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+			} catch (SQLException e) {
+				System.out.println(e);
+				JOptionPane.showMessageDialog(null, "Error al modificar los datos", "Error", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 

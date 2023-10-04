@@ -1,6 +1,7 @@
 package vista;
 
 import controlador.Controlador;
+import modeloVo.Cliente;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +11,7 @@ import java.awt.event.ActionListener;
 public class Form07ModificarCliente extends JFrame{
     private final JPanel contentPane = new JPanel();
 
-    Controlador controlador;
+    Controlador controlador = new Controlador();
 
     private static String dniCliente, nombreCliente, primerApellido, calle, numero, localidad, telefono;
 
@@ -171,8 +172,7 @@ public class Form07ModificarCliente extends JFrame{
             }else if(nombreClienteIntro.isEmpty() || primerApellidoIntro.isEmpty() || calleIntro.isEmpty() || numeroIntro.isEmpty() || localidadIntro.isEmpty() || telefonoIntro.isEmpty()){
                 JOptionPane.showMessageDialog(null, "Error: no se han rellenado todos los campos","Error",JOptionPane.ERROR_MESSAGE);
             }else{
-                //controlador.modificarCliente(cliente, codigo);
-                System.out.println("Probando...");
+                modificarCliente();
             }
         }
     }
@@ -194,5 +194,24 @@ public class Form07ModificarCliente extends JFrame{
         numeroIntro = textField_numero.getText();
         localidadIntro = textField_localidad.getText();
         telefonoIntro = textField_telefono.getText();
+    }
+
+
+    public void modificarCliente() {
+        if(textField_nif.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo NIF está vacío. Por favor, introduzca un dni.");
+        }
+
+        Cliente cliente = new Cliente();
+        capturarDatos();
+
+        String nombreCompletoCliente = nombreClienteIntro+" "+primerApellidoIntro;
+        String direccionCliente = calleIntro+", "+numeroIntro+", "+localidadIntro;
+        int telefono = Integer.parseInt(telefonoIntro);
+        cliente.setNombre(nombreCompletoCliente);
+        cliente.setDireccion(direccionCliente);
+        cliente.setTelefono(telefono);
+
+        controlador.modificarCliente(cliente, dniCliente);
     }
 }
