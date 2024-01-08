@@ -286,6 +286,47 @@ public class ReservaDao {
 		conexion.desconectar();
 		return reserva;
 	}
+	
+	
+	public ArrayList<FilaReserva> HistorialReservasMes(int mes, int anho) {
+		Conexion conexion = new Conexion();
+
+		String consulta = "select clNombre, inMatricula, coPrecio, DateDiff(reFecFinal, reFecInicio), coPrecio*DateDiff(reFecFinal, reFecInicio)"
+				+" from historialInvolucra join Clientes on inCliente = clNif"
+				+" join historialReservas on inReserva = reCodigo"
+				+" join Coches on inMatricula = coMatricula"
+				+" where month(reFecInicio)=? and year(reFecInicio)=?";
+
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		ArrayList <FilaReserva> reserva = new ArrayList<FilaReserva>();
+
+		try {
+			ps = conexion.getConnection().prepareStatement(consulta);
+			ps.setInt(1, mes);
+			ps.setInt(2,  anho);
+			rs = ps.executeQuery();
+
+			while(rs.next()) {
+				
+				FilaReserva fila = new FilaReserva();
+				fila.setNombreCliente(rs.getString(1));
+				fila.setMatriculaCoche(rs.getString(2));
+				fila.setPrecio(rs.getInt(3));
+				fila.setDias(rs.getInt(4));
+				fila.setImporte(rs.getInt(5));
+
+
+
+				reserva.add(fila);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		conexion.desconectar();
+		return reserva;
+	}
 
 
 

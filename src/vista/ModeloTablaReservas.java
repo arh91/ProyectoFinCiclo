@@ -59,5 +59,9 @@ public class ModeloTablaReservas extends AbstractTableModel{
 	public void ListadoReservasMes(int mes) {
 		filaReserva = controlador.ReservasMes(mes);
 	}
+	
+	public void HistorialReservasMes(int mes, int anho) {
+		filaReserva = controlador.HistorialReservasMes(mes, anho);
+	}
 
 }

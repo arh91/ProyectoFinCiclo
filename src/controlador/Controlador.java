@@ -198,6 +198,10 @@ public class Controlador {
 	public ArrayList<FilaReserva> ReservasMes(int mes) {
 		return reservaDao.ReservasMes(mes);
 	}
+	
+	public ArrayList<FilaReserva> HistorialReservasMes(int mes, int anho){
+		return reservaDao.HistorialReservasMes(mes, anho);
+	}
 
 	public ArrayList<Cliente> cargarClientes(){
 		return clienteDao.cargarClientes();

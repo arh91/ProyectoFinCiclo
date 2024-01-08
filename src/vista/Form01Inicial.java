@@ -79,8 +79,8 @@ public class Form01Inicial extends JFrame{
 		btnSalir.setBounds(155, 201, 140, 25);
 		getContentPane().add(btnSalir);
 
-		//controlador.moverAHistorial();
-		//controlador.eliminarReservasAntiguas();
+		controlador.moverAHistorial();
+		controlador.eliminarReservasAntiguas();
 	}
 	
 	private class BtnNuevaReservaActionListener implements ActionListener {

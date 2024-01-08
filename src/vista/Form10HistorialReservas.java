@@ -34,11 +34,12 @@ public class Form10HistorialReservas extends JFrame {
     private final JTextField textField = new JTextField();
     private String[] mesesAnho = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
     private String[] numerosMeses = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
+    private String[] anhos = {};
     //private String[] mesesAnteriores = {};
     //private String[] mesesSiguientes = {};
     private ModeloTablaReservas miModelo;
     private JScrollPane scrollPane;
-    private JTable table_1;
+    private JTable tabla_historial_reservas;
     JComboBox comboBoxMeses;
     JComboBox comboBoxAnhos;
 
@@ -74,10 +75,10 @@ public class Form10HistorialReservas extends JFrame {
         getContentPane().add(contentPanel, BorderLayout.CENTER);
         contentPanel.setLayout(null);
 
-        JLabel lblNewLabel = new JLabel("HISTORIAL RESERVAS");
-        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        lblNewLabel.setBounds(230, 22, 238, 43);
-        contentPanel.add(lblNewLabel);
+        JLabel lblTitulo = new JLabel("HISTORIAL RESERVAS");
+        lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        lblTitulo.setBounds(230, 22, 238, 43);
+        contentPanel.add(lblTitulo);
 
         comboBoxMeses = new JComboBox();
         comboBoxMeses.setBounds(90, 97, 186, 21);
@@ -91,40 +92,40 @@ public class Form10HistorialReservas extends JFrame {
         comboBoxAnhos.setSelectedIndex(0);
         contentPanel.add(comboBoxAnhos);
 
-        JLabel lblNewLabel_1 = new JLabel("Mes");
-        lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        lblNewLabel_1.setBounds(153, 74, 45, 13);
-        contentPanel.add(lblNewLabel_1);
+        JLabel lblComboMes = new JLabel("Mes");
+        lblComboMes.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        lblComboMes.setBounds(153, 74, 45, 13);
+        contentPanel.add(lblComboMes);
 
-        JLabel lblNewLabel_2 = new JLabel("Año");
-        lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        lblNewLabel_2.setBounds(462, 73, 45, 13);
-        contentPanel.add(lblNewLabel_2);
+        JLabel lblComboAnho = new JLabel("Año");
+        lblComboAnho.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        lblComboAnho.setBounds(462, 73, 45, 13);
+        contentPanel.add(lblComboAnho);
 
         scrollPane = new JScrollPane();
         scrollPane.setBounds(10, 162, 811, 238);
         contentPanel.add(scrollPane);
 
-        table_1 = new JTable();
-        scrollPane.setColumnHeaderView(table_1);
+        tabla_historial_reservas = new JTable();
+        scrollPane.setColumnHeaderView(tabla_historial_reservas);
 
 
         {
-            JPanel buttonPane = new JPanel();
-            buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-            getContentPane().add(buttonPane, BorderLayout.SOUTH);
+            JPanel panelBotones = new JPanel();
+            panelBotones.setLayout(new FlowLayout(FlowLayout.RIGHT));
+            getContentPane().add(panelBotones, BorderLayout.SOUTH);
             {
-                JButton okButton = new JButton("OK");
-                okButton.addActionListener(new OkButtonActionListener());
-                okButton.setActionCommand("OK");
-                buttonPane.add(okButton);
-                getRootPane().setDefaultButton(okButton);
+                JButton btnOk = new JButton("OK");
+                btnOk.addActionListener(new OkButtonActionListener());
+                btnOk.setActionCommand("OK");
+                panelBotones.add(btnOk);
+                getRootPane().setDefaultButton(btnOk);
             }
             {
-                JButton atrasButton = new JButton("Atrás");
-                atrasButton.addActionListener(new AtrasButtonActionListener());
-                atrasButton.setActionCommand("Atrás");
-                buttonPane.add(atrasButton);
+                JButton btnAtras = new JButton("Atrás");
+                btnAtras.addActionListener(new AtrasButtonActionListener());
+                btnAtras.setActionCommand("Atrás");
+                panelBotones.add(btnAtras);
             }
         }
 
@@ -145,7 +146,7 @@ public class Form10HistorialReservas extends JFrame {
 
     private class OkButtonActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-
+        	cargarTablaHistorial();
         }
     }
     private class AtrasButtonActionListener implements ActionListener {
@@ -254,6 +255,36 @@ public class Form10HistorialReservas extends JFrame {
             comboAnhos.addItem(anhos[i]);
         }
     }
+    
+    private void rellenarArrayAnhos() {
+    	for(int i=0; i<=5; i++) {
+    		anhos[i] = String.valueOf(intPrimerAnho+i);
+    	}
+    }
+    
+    
+    private void cargarTablaHistorial() {
+    	int mes = 0;
+    	for(int i=0; i<mesesAnho.length; i++){
+			if(comboBoxMeses.getSelectedItem() == mesesAnho[i]){
+				mes = i+1;
+				break;
+			}
+		}
+		int anho = Integer.parseInt(comboBoxAnhos.getSelectedItem().toString());
+		historialReservasMes(mes, anho);
+		System.out.println(mes+" "+anho);
+	}
+    
+    
+    
+    private void historialReservasMes(int mes, int anho) {
+		miModelo = new ModeloTablaReservas();
+		tabla_historial_reservas = new JTable(miModelo);
+		centrarTextoTabla(tabla_historial_reservas);
+		miModelo.HistorialReservasMes(mes, anho);
+		scrollPane.setViewportView(tabla_historial_reservas);
+	}
 
 }
 
